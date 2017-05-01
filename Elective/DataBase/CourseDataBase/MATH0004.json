@@ -1,0 +1,12 @@
+﻿{
+	"name" : "研究型学习",
+	"courseID" : "MATH0004",
+	"type" : "专业课",
+	"teacherName" : "张平文",
+	"department" : "数学科学学院",
+	"credit": 3,
+	"classID" :  2,
+	"curNumber" : 0,
+	"maxNumber" : 30,
+	"classTime" : [43, 44, 45]
+}

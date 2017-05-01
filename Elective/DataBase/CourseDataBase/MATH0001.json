@@ -1,0 +1,12 @@
+﻿{
+	"name" : "常微分方程",
+	"courseID" : "MATH0001",
+	"type" : "专业课",
+	"teacherName" : "李伟固",
+	"department" : "数学科学学院",
+	"credit": 4,
+	"classID" :  2,
+	"curNumber" : 1,
+	"maxNumber" : 100,
+	"classTime" : [13, 14, 49, 50]
+}

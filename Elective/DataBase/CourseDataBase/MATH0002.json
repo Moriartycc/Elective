@@ -1,0 +1,12 @@
+﻿{
+	"name" : "低年级讨论班",
+	"courseID" : "MATH0002",
+	"type" : "专业课",
+	"teacherName" : "徐茂智",
+	"department" : "数学科学学院",
+	"credit": 3,
+	"classID" :  1,
+	"curNumber" : 1,
+	"maxNumber" : 30,
+	"classTime" : [7, 8, 9]
+}
