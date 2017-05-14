@@ -2,26 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b534476d-771b-45b2-9fe3-0a0c8c09340a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/data/element/Course.class" afterPath="$PROJECT_DIR$/bin/data/element/Course.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/data/element/Student.class" afterPath="$PROJECT_DIR$/bin/data/element/Student.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/data/environment/Environment.class" afterPath="$PROJECT_DIR$/bin/data/environment/Environment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/Main$1.class" afterPath="$PROJECT_DIR$/bin/elective/Main$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/Main$Button1Handler.class" afterPath="$PROJECT_DIR$/bin/elective/Main$Button1Handler.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/Main.class" afterPath="$PROJECT_DIR$/bin/elective/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/frame/MainFrame$1.class" afterPath="$PROJECT_DIR$/bin/elective/frame/MainFrame$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/frame/MainFrame$2.class" afterPath="$PROJECT_DIR$/bin/elective/frame/MainFrame$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/frame/MainFrame$3.class" afterPath="$PROJECT_DIR$/bin/elective/frame/MainFrame$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/frame/MainFrame$4.class" afterPath="$PROJECT_DIR$/bin/elective/frame/MainFrame$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/frame/MainFrame$5.class" afterPath="$PROJECT_DIR$/bin/elective/frame/MainFrame$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/frame/MainFrame$6.class" afterPath="$PROJECT_DIR$/bin/elective/frame/MainFrame$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/frame/MainFrame$7.class" afterPath="$PROJECT_DIR$/bin/elective/frame/MainFrame$7.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/frame/MainFrame.class" afterPath="$PROJECT_DIR$/bin/elective/frame/MainFrame.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/frame/TableButton.class" afterPath="$PROJECT_DIR$/bin/elective/frame/TableButton.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/frame/TableButtonEditor$1.class" afterPath="$PROJECT_DIR$/bin/elective/frame/TableButtonEditor$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/frame/TableButtonEditor.class" afterPath="$PROJECT_DIR$/bin/elective/frame/TableButtonEditor.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/frame/TableButtonRender.class" afterPath="$PROJECT_DIR$/bin/elective/frame/TableButtonRender.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/frame/TableEvent.class" afterPath="$PROJECT_DIR$/bin/elective/frame/TableEvent.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/environment/Environment.java" afterPath="$PROJECT_DIR$/src/data/environment/Environment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/elective/Main.java" afterPath="$PROJECT_DIR$/src/elective/Main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,8 +19,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/elective/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state relative-caret-position="373">
+              <caret line="136" column="66" lean-forward="true" selection-start-line="136" selection-start-column="66" selection-end-line="136" selection-end-column="66" />
               <folding />
             </state>
           </provider>
@@ -61,9 +43,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#846#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -110,6 +90,7 @@
       <list>
         <option value="$PROJECT_DIR$/bin/data/environment/Environment.class" />
         <option value="$PROJECT_DIR$/src/data/environment/Environment.java" />
+        <option value="$PROJECT_DIR$/src/elective/Main.java" />
       </list>
     </option>
   </component>
@@ -735,12 +716,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1494776386991</updated>
-      <workItem from="1494776393050" duration="569000" />
+      <workItem from="1494776393050" duration="901000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="569000" />
+    <option name="totallyTimeSpent" value="901000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1600" height="900" extended-state="0" />
@@ -806,9 +787,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#846#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -832,8 +811,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/elective/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state relative-caret-position="373">
+          <caret line="136" column="66" lean-forward="true" selection-start-line="136" selection-start-column="66" selection-end-line="136" selection-end-column="66" />
           <folding />
         </state>
       </provider>

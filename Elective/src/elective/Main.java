@@ -94,7 +94,7 @@ public class Main extends JFrame {
 		contentPane.add(button1);
 		
 		JLabel lblVersion = new JLabel("\u897F\u4EAC\u5927\u5B66\u9009\u8BFE\u7CFB\u7EDF Version 0.1");
-		lblVersion.setFont(new Font("ËÎÌå", Font.PLAIN, 15));
+		lblVersion.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.PLAIN, 15));
 		lblVersion.setBounds(117, 253, 223, 18);
 		contentPane.add(lblVersion);
 		
@@ -134,7 +134,7 @@ public class Main extends JFrame {
 			try {
 				user = login(textField1.getText());
 			} catch (FileNotFoundException _e) {
-				JOptionPane.showMessageDialog(getContentPane(),"¸ÃÑ§ºÅ²»´æÔÚ£¬ÇëÖØÊÔ£¡", "´íÎó", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(getContentPane(),"è¯¥å­¦å·ä¸å­˜åœ¨ï¼Œè¯·é‡è¯•ï¼", "é”™è¯¯", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			JFrame mainFrame = new MainFrame(user);
