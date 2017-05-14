@@ -94,7 +94,7 @@ public class Main extends JFrame {
 		contentPane.add(button1);
 		
 		JLabel lblVersion = new JLabel("\u897F\u4EAC\u5927\u5B66\u9009\u8BFE\u7CFB\u7EDF Version 0.1");
-		lblVersion.setFont(new Font("����", Font.PLAIN, 15));
+		lblVersion.setFont(new Font("宋体", Font.PLAIN, 15));
 		lblVersion.setBounds(117, 253, 223, 18);
 		contentPane.add(lblVersion);
 		
