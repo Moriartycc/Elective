@@ -66,17 +66,17 @@ public class MainFrame extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"¿Î³ÌÃû",
-				"¿Î³ÌºÅ",
-				"¿Î³ÌÀà±ğ",
-				"Ñ§·Ö",
-				"½ÌÊ¦",
-				"°àºÅ",
-				"¿ª¿Îµ¥Î»",
-				"¿Î³ÌÊ±¼ä",
-				"ÏŞÑ¡/ÒÑÑ¡",
-				"Ìí¼ÓÔ¤Ñ¡",
-				"É¾³ı"
+				"è¯¾ç¨‹å",
+				"è¯¾ç¨‹å·",
+				"è¯¾ç¨‹ç±»åˆ«",
+				"å­¦åˆ†",
+				"æ•™å¸ˆ",
+				"ç­å·",
+				"å¼€è¯¾å•ä½",
+				"è¯¾ç¨‹æ—¶é—´",
+				"é™é€‰/å·²é€‰",
+				"æ·»åŠ é¢„é€‰",
+				"åˆ é™¤"
 			}
 		){
 			/**
@@ -112,8 +112,8 @@ public class MainFrame extends JFrame {
 			}
 			
 		};
- 		table1.getColumnModel().getColumn(9).setCellRenderer(new TableButtonRender("Ìí¼Ó"));
-		TableButtonEditor editor1 = new TableButtonEditor(e1, "Ìí¼Ó");
+ 		table1.getColumnModel().getColumn(9).setCellRenderer(new TableButtonRender("æ·»åŠ "));
+		TableButtonEditor editor1 = new TableButtonEditor(e1, "æ·»åŠ ");
 		table1.getColumnModel().getColumn(9).setCellEditor(editor1);
 		
 		TableEvent e2 = new TableEvent() {
@@ -124,8 +124,8 @@ public class MainFrame extends JFrame {
 			}
 			
 		};
- 		table1.getColumnModel().getColumn(10).setCellRenderer(new TableButtonRender("É¾³ı"));
-		TableButtonEditor editor2 = new TableButtonEditor(e2, "É¾³ı");
+ 		table1.getColumnModel().getColumn(10).setCellRenderer(new TableButtonRender("åˆ é™¤"));
+		TableButtonEditor editor2 = new TableButtonEditor(e2, "åˆ é™¤");
 		table1.getColumnModel().getColumn(10).setCellEditor(editor2);
 		renewList1();
 		
@@ -139,17 +139,17 @@ public class MainFrame extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"¿Î³ÌÃû",
-				"¿Î³ÌºÅ",
-				"¿Î³ÌÀà±ğ",
-				"Ñ§·Ö",
-				"½ÌÊ¦",
-				"°àºÅ",
-				"¿ª¿Îµ¥Î»",
-				"¿Î³ÌÊ±¼ä",
-				"ÏŞÑ¡/ÒÑÑ¡",
-				"Ñ¡¿Î",
-				"É¾³ı"
+				"è¯¾ç¨‹å",
+				"è¯¾ç¨‹å·",
+				"è¯¾ç¨‹ç±»åˆ«",
+				"å­¦åˆ†",
+				"æ•™å¸ˆ",
+				"ç­å·",
+				"å¼€è¯¾å•ä½",
+				"è¯¾ç¨‹æ—¶é—´",
+				"é™é€‰/å·²é€‰",
+				"é€‰è¯¾",
+				"åˆ é™¤"
 			}
 		){
 			/**
@@ -182,8 +182,8 @@ public class MainFrame extends JFrame {
 			}
 			
 		};
- 		table2.getColumnModel().getColumn(9).setCellRenderer(new TableButtonRender("Ñ¡¿Î"));
-		editor1 = new TableButtonEditor(e1, "Ñ¡¿Î");
+ 		table2.getColumnModel().getColumn(9).setCellRenderer(new TableButtonRender("é€‰è¯¾"));
+		editor1 = new TableButtonEditor(e1, "é€‰è¯¾");
 		table2.getColumnModel().getColumn(9).setCellEditor(editor1);
 		
 		e2 = new TableEvent() {
@@ -197,8 +197,8 @@ public class MainFrame extends JFrame {
 			}
 			
 		};
- 		table2.getColumnModel().getColumn(10).setCellRenderer(new TableButtonRender("É¾³ı"));
-		editor2 = new TableButtonEditor(e2, "É¾³ı");
+ 		table2.getColumnModel().getColumn(10).setCellRenderer(new TableButtonRender("åˆ é™¤"));
+		editor2 = new TableButtonEditor(e2, "åˆ é™¤");
 		table2.getColumnModel().getColumn(10).setCellEditor(editor2);
 		renewList2();
 		
@@ -212,16 +212,16 @@ public class MainFrame extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"¿Î³ÌÃû",
-				"¿Î³ÌºÅ",
-				"¿Î³ÌÀà±ğ",
-				"Ñ§·Ö",
-				"½ÌÊ¦",
-				"°àºÅ",
-				"¿ª¿Îµ¥Î»",
-				"¿Î³ÌÊ±¼ä",
-				"ÏŞÑ¡/ÒÑÑ¡",
-				"ÍË¿Î"
+				"è¯¾ç¨‹å",
+				"è¯¾ç¨‹å·",
+				"è¯¾ç¨‹ç±»åˆ«",
+				"å­¦åˆ†",
+				"æ•™å¸ˆ",
+				"ç­å·",
+				"å¼€è¯¾å•ä½",
+				"è¯¾ç¨‹æ—¶é—´",
+				"é™é€‰/å·²é€‰",
+				"é€€è¯¾"
 			}
 		){
 			/**
