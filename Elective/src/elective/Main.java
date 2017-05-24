@@ -80,7 +80,7 @@ public class Main extends JFrame {
 	 */
 	public Main() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/com/sun/javafx/scene/web/skin/OrderedListNumbers_16x16_JFX.png")));
-		setTitle("\u897F\u4EAC\u5927\u5B66\u9009\u8BFE\u7CFB\u7EDF Ver 0.1");
+		setTitle("西京大学选课系统 Ver 0.1");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 456, 331);
 		contentPane = new JPanel();
@@ -88,25 +88,25 @@ public class Main extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton button1 = new JButton("\u767B\u5F55");
+		JButton button1 = new JButton("登陆");
 		button1.addActionListener(new Button1Handler());
 		button1.setBounds(148, 194, 154, 27);
 		contentPane.add(button1);
 		
-		JLabel lblVersion = new JLabel("\u897F\u4EAC\u5927\u5B66\u9009\u8BFE\u7CFB\u7EDF Version 0.1");
+		JLabel lblVersion = new JLabel("西京大学选课系统 Version 0.1");
 		lblVersion.setFont(new Font("宋体", Font.PLAIN, 15));
 		lblVersion.setBounds(117, 253, 223, 18);
 		contentPane.add(lblVersion);
 		
-		JLabel label1 = new JLabel("\u5B66\u53F7\uFF1A");
+		JLabel label1 = new JLabel("学号:");
 		label1.setBounds(72, 58, 73, 18);
 		contentPane.add(label1);
 		
-		JLabel label2 = new JLabel("\u5BC6\u7801\uFF1A");
+		JLabel label2 = new JLabel("密码:");
 		label2.setBounds(72, 98, 73, 18);
 		contentPane.add(label2);
 		
-		JLabel label3 = new JLabel("\u9A8C\u8BC1\u7801\uFF1A");
+		JLabel label3 = new JLabel("验证码:");
 		label3.setBounds(72, 138, 73, 18);
 		contentPane.add(label3);
 		
