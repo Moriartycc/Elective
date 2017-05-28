@@ -6,6 +6,7 @@ import java.util.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import com.google.gson.Gson;
@@ -29,6 +30,10 @@ import java.awt.Toolkit;
 
 public class Main extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField1;
 	private JTextField textField2;
@@ -80,20 +85,22 @@ public class Main extends JFrame {
 	 */
 	public Main() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/com/sun/javafx/scene/web/skin/OrderedListNumbers_16x16_JFX.png")));
-		setTitle("西京大学选课系统 Ver 0.1");
+		setTitle("西京大学选课系统 Ver 0.2");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 456, 331);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setContentPane(contentPane);
+		
 		
 		JButton button1 = new JButton("登陆");
-		button1.addActionListener(new Button1Handler());
+		button1.addActionListener(new Button1Handler(this));
 		button1.setBounds(148, 194, 154, 27);
 		contentPane.add(button1);
 		
-		JLabel lblVersion = new JLabel("西京大学选课系统 Version 0.1");
+		JLabel lblVersion = new JLabel("西京大学选课系统 Version 0.2");
 		lblVersion.setFont(new Font("宋体", Font.PLAIN, 15));
 		lblVersion.setBounds(117, 253, 223, 18);
 		contentPane.add(lblVersion);
@@ -115,7 +122,7 @@ public class Main extends JFrame {
 		contentPane.add(textField1);
 		textField1.setColumns(10);
 		
-		textField2 = new JTextField();
+		textField2 = new JPasswordField();
 		textField2.setColumns(10);
 		textField2.setBounds(148, 95, 192, 24);
 		contentPane.add(textField2);
@@ -128,6 +135,12 @@ public class Main extends JFrame {
 	
 	private class Button1Handler implements ActionListener
 	{
+		private Main ref;
+		
+		Button1Handler(Main _ref) {
+			ref = _ref;
+		}
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Student user = null;
@@ -139,7 +152,8 @@ public class Main extends JFrame {
 			}
 			JFrame mainFrame = new MainFrame(user);
 			mainFrame.setVisible(true);
-			mainFrame.setResizable(false);
+			mainFrame.setResizable(true);
+			ref.dispose();
 		}
 	}
 }

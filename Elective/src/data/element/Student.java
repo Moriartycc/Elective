@@ -116,4 +116,14 @@ public class Student {
 		preselected.add(_course);
 		rewriteData();
 	}
+	
+	public void removeSelectedList(String _course) {
+		selected.remove(_course);
+		rewriteData();
+	}
+	
+	public void addSelectedList(String _course) {
+		selected.add(_course);
+		rewriteData();
+	}
 }

@@ -1,26 +1,44 @@
 package elective.frame;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-
+import javax.swing.border.TitledBorder;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JTable;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
+
 import java.awt.Scrollbar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
@@ -38,31 +56,65 @@ public class MainFrame extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	MainFrame ccb = this;
-	private JPanel contentPane1;
-	private JTable table1, table2, table3;
-	private JLabel label2;
-	private JLabel label3;
+	private JPanel contentPane, panel1, panel2, panel3, panel4, panelScroll;
+	private JButton btn1, btn2;
+	private JTable table;
+	private JMenuBar menuBar = new JMenuBar();
+	private JMenu Menu1 = new JMenu("操作(A)"), Menu2 = new JMenu("帮助(H)");
 	private Student user;
+	ArrayList<String> planSelectedList = new ArrayList<String>();
+	private int nowState = 0; // 0-选课计划, 1-预选列表, 2-已选列表
+	
 	public MainFrame(Student _user) {
 		this.user = _user;
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/com/sun/javafx/scene/web/skin/IncreaseIndent_16x16_JFX.png")));
-		setTitle("\u8BFE\u7A0B\u7BA1\u7406");
-		setBounds(100, 100, 1900, 982);
+		setTitle("课程管理 - " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
+		new Timer(1000, new TimeControlListener(this)).start();
+		setBounds(100, 100, 800, 600);
+		setJMenuBar(menuBar);
+		Menu1.setFont(new Font("宋体",Font.PLAIN, 12));
+		Menu2.setFont(new Font("宋体",Font.PLAIN, 12));
+		Menu1.setMnemonic('A');
+		Menu2.setMnemonic('H');
+		menuBar.add(Menu1);
+		menuBar.add(Menu2);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		contentPane1 = new JPanel();
-		contentPane1.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane1);
-		contentPane1.setLayout(null);
+		contentPane = new JPanel();
 		
-		JScrollPane scrollPane1 = new JScrollPane();
-		scrollPane1.setBounds(14, 75, 922, 405);
-		contentPane1.add(scrollPane1);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new GridBagLayout());
+		setContentPane(contentPane);
 		
-		table1 = new JTable();
-		scrollPane1.setViewportView(table1);
-		table1.setModel(new DefaultTableModel(
+		panel1 = new JPanel();
+		panel2 = new JPanel();
+		panel3 = new JPanel();
+		panel4 = new JPanel();
+		panel1.setLayout(new BorderLayout());
+		panel2.setLayout(new BorderLayout());
+		panel3.setLayout(new BorderLayout());
+		panel4.setLayout(new BorderLayout());
+		panelScroll = new JPanel();
+		panelScroll.setLayout(new BorderLayout());
+		panelScroll.setBorder(BorderFactory.createTitledBorder(null, "课程列表", TitledBorder.LEADING, TitledBorder.TOP, new Font("Dialog", Font.PLAIN, 12), new Color(51, 51, 51)));
+		
+		table = new JTable();
+		JScrollPane scrollPane = new JScrollPane(table);
+		panelScroll.add(scrollPane, BorderLayout.CENTER);
+		contentPane.add(panel1, new GBC(0,0,7,1).setFill(GBC.BOTH).setWeight(5, 5));
+		contentPane.add(panel3, new GBC(0,1,1,6).setFill(GBC.BOTH).setWeight(5, 100));
+		contentPane.add(panelScroll, new GBC(1,1,5,5).setFill(GBC.BOTH).setWeight(100, 100));
+		contentPane.add(panel4, new GBC(6,1,1,6).setFill(GBC.BOTH).setWeight(5, 100));
+		contentPane.add(panel2, new GBC(1,6,5,1).setFill(GBC.BOTH).setWeight(5, 5));
+		
+		btn1 = new JButton("预选列表");
+		btn2 = new JButton("已选列表");
+		panel2.add(btn1, BorderLayout.WEST);
+		panel2.add(btn2, BorderLayout.EAST);
+		panel2.add(new JLabel("西京大学选课系统 Version 0.2", JLabel.CENTER), BorderLayout.SOUTH);
+		panel1.add(new JLabel("选课计划", JLabel.CENTER), BorderLayout.CENTER);
+		
+		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
@@ -75,8 +127,6 @@ public class MainFrame extends JFrame {
 				"开课单位",
 				"课程时间",
 				"限选/已选",
-				"添加预选",
-				"删除"
 			}
 		){
 			/**
@@ -84,186 +134,201 @@ public class MainFrame extends JFrame {
 			 */
 			private static final long serialVersionUID = 1L;
 
-			@Override  
-            public boolean isCellEditable(int row,int column){  
-                if (column < 9) return false; else return true;
+			public boolean isCellEditable(int row, int column) {
+				return false;
 			}
 		});
-		table1.setEnabled(true);
-		table1.getColumnModel().getColumn(0).setPreferredWidth(100);
-		table1.getColumnModel().getColumn(1).setPreferredWidth(100);
-		table1.getColumnModel().getColumn(2).setPreferredWidth(60);
-		table1.getColumnModel().getColumn(3).setPreferredWidth(30);
-		table1.getColumnModel().getColumn(4).setPreferredWidth(60);
-		table1.getColumnModel().getColumn(5).setPreferredWidth(30);
-		table1.getColumnModel().getColumn(6).setPreferredWidth(100);
-		table1.getColumnModel().getColumn(7).setPreferredWidth(100);
-		table1.getColumnModel().getColumn(8).setPreferredWidth(60);
-		table1.getColumnModel().getColumn(9).setPreferredWidth(50);
-		table1.getColumnModel().getColumn(10).setPreferredWidth(50);
-		TableEvent e1 = new TableEvent() {
+		table.setEnabled(true);
+		table.setColumnSelectionAllowed(false);
+		table.setRowSelectionAllowed(true);
+		table.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				switch (nowState) {
+				case 0:
+					if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
+						user.addPreselectedList((String) table.getModel().getValueAt(table.getSelectedRow(), 1));
+						renewList();
+					} else if (SwingUtilities.isRightMouseButton(e)) {  
+		                JPopupMenu popMenu = new JPopupMenu();  
+		                JTable table = (JTable) e.getComponent();  
 
-			@Override
-			public void invoke(ActionEvent e) {
-				TableButton button = (TableButton)e.getSource();
-				user.addPreselectedList((String) table1.getModel().getValueAt(button.getRow(), 1));
-				renewList1();
-				renewList2();
+		                int row = table.rowAtPoint(e.getPoint());  
+		                if (row == -1) {  
+		                    return ;  
+		                }  
+
+		                int[] rows = table.getSelectedRows();  
+		                boolean inSelected = false ;  
+	
+		                for(int r : rows){  
+		                    if(row == r){  
+		                        inSelected = true ;  
+		                        break ;  
+		                    }  
+		                }  
+
+		                if(!inSelected){  
+		                    table.setRowSelectionInterval(row, row);  
+		                }  
+
+		                popMenu.add(new JMenuItem("详细信息"));  
+		                popMenu.show(e.getComponent(), e.getX(), e.getY());  
+		            } 
+					break;
+				case 1:
+					if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
+						user.removePreselectedList((String) table.getModel().getValueAt(table.getSelectedRow(), 1));
+						user.addSelectedList((String) table.getModel().getValueAt(table.getSelectedRow(), 1));
+						renewList();
+					} else if (SwingUtilities.isRightMouseButton(e)) {  
+		                JPopupMenu popMenu = new JPopupMenu();  
+		                JTable table = (JTable) e.getComponent();  
+
+		                int row = table.rowAtPoint(e.getPoint());  
+		                if (row == -1) {  
+		                    return ;  
+		                }  
+
+		                int[] rows = table.getSelectedRows();  
+		                boolean inSelected = false ;  
+	
+		                for(int r : rows){  
+		                    if(row == r){  
+		                        inSelected = true ;  
+		                        break ;  
+		                    }  
+		                }  
+
+		                if(!inSelected){  
+		                    table.setRowSelectionInterval(row, row);  
+		                }  
+
+		                popMenu.add(new JMenuItem("详细信息"));  
+		                popMenu.add(new JMenuItem("移出预选列表"));
+		                ((JMenuItem) popMenu.getComponent(1)).addActionListener(new ActionListener() {
+
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								user.removePreselectedList((String) table.getModel().getValueAt(table.getSelectedRow(), 1));
+								renewList();
+							}
+		                	
+		                });
+		                popMenu.show(e.getComponent(), e.getX(), e.getY());  
+		            } 
+					break;
+				case 2:
+					if (SwingUtilities.isRightMouseButton(e)) {  
+		                JPopupMenu popMenu = new JPopupMenu();  
+		                JTable table = (JTable) e.getComponent();  
+
+		                int row = table.rowAtPoint(e.getPoint());  
+		                if (row == -1) {  
+		                    return ;  
+		                }  
+
+		                int[] rows = table.getSelectedRows();  
+		                boolean inSelected = false ;  
+	
+		                for(int r : rows){  
+		                    if(row == r){  
+		                        inSelected = true ;  
+		                        break ;  
+		                    }  
+		                }  
+
+		                if(!inSelected){  
+		                    table.setRowSelectionInterval(row, row);  
+		                }  
+
+		                popMenu.add(new JMenuItem("详细信息"));  
+		                popMenu.add(new JMenuItem("移出已选列表"));
+		                ((JMenuItem) popMenu.getComponent(1)).addActionListener(new ActionListener() {
+
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								user.addPreselectedList((String) table.getModel().getValueAt(table.getSelectedRow(), 1));
+								user.removeSelectedList((String) table.getModel().getValueAt(table.getSelectedRow(), 1));
+								renewList();
+							}
+		                	
+		                });
+		                popMenu.show(e.getComponent(), e.getX(), e.getY());  
+		            } 
+					break;
+				}
 			}
-			
-		};
- 		table1.getColumnModel().getColumn(9).setCellRenderer(new TableButtonRender("添加"));
-		TableButtonEditor editor1 = new TableButtonEditor(e1, "添加");
-		table1.getColumnModel().getColumn(9).setCellEditor(editor1);
+		});
 		
-		TableEvent e2 = new TableEvent() {
+		btn1.addActionListener(new ActionListener() {
 
 			@Override
-			public void invoke(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {
+				switch (nowState) {
+				case 0:
+					nowState = 1;
+					((JLabel) panel1.getComponent(0)).setText("预选列表");
+					btn1.setText("选课计划");
+					btn2.setText("已选列表");
+					renewList();
+					break;
+				case 1:
+					nowState = 0;
+					((JLabel) panel1.getComponent(0)).setText("选课计划");
+					btn1.setText("预选列表");
+					btn2.setText("已选列表");
+					renewList();
+					break;
+				case 2:
+					nowState = 0;
+					((JLabel) panel1.getComponent(0)).setText("选课计划");
+					btn1.setText("预选列表");
+					btn2.setText("已选列表");
+					renewList();
+					break;
+				}
 				
 			}
 			
-		};
- 		table1.getColumnModel().getColumn(10).setCellRenderer(new TableButtonRender("删除"));
-		TableButtonEditor editor2 = new TableButtonEditor(e2, "删除");
-		table1.getColumnModel().getColumn(10).setCellEditor(editor2);
-		renewList1();
-		
-		JScrollPane scrollPane2 = new JScrollPane();
-		scrollPane2.setBounds(946, 75, 922 , 405);
-		contentPane1.add(scrollPane2);
-		
-		table2 = new JTable();
-		scrollPane2.setViewportView(table2);
-		table2.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"课程名",
-				"课程号",
-				"课程类别",
-				"学分",
-				"教师",
-				"班号",
-				"开课单位",
-				"课程时间",
-				"限选/已选",
-				"选课",
-				"删除"
-			}
-		){
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override  
-            public boolean isCellEditable(int row,int column){  
-                if (column < 9) return false; else return true;
-            }
 		});
-		table2.setEnabled(true);
-		table2.getColumnModel().getColumn(0).setPreferredWidth(100);
-		table2.getColumnModel().getColumn(1).setPreferredWidth(100);
-		table2.getColumnModel().getColumn(2).setPreferredWidth(60);
-		table2.getColumnModel().getColumn(3).setPreferredWidth(30);
-		table2.getColumnModel().getColumn(4).setPreferredWidth(60);
-		table2.getColumnModel().getColumn(5).setPreferredWidth(30);
-		table2.getColumnModel().getColumn(6).setPreferredWidth(100);
-		table2.getColumnModel().getColumn(7).setPreferredWidth(100);
-		table2.getColumnModel().getColumn(8).setPreferredWidth(60);
-		table2.getColumnModel().getColumn(9).setPreferredWidth(50);
-		table2.getColumnModel().getColumn(10).setPreferredWidth(50);
-		e1 = new TableEvent() {
+		btn2.addActionListener(new ActionListener() {
 
 			@Override
-			public void invoke(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {
+				switch (nowState) {
+				case 0:
+					nowState = 2;
+					((JLabel) panel1.getComponent(0)).setText("已选列表");
+					btn1.setText("选课计划");
+					btn2.setText("预选列表");
+					renewList();
+					break;
+				case 1:
+					nowState = 2;
+					((JLabel) panel1.getComponent(0)).setText("已选列表");
+					btn1.setText("选课计划");
+					btn2.setText("预选列表");
+					renewList();
+					break;
+				case 2:
+					nowState = 1;
+					((JLabel) panel1.getComponent(0)).setText("预选列表");
+					btn1.setText("选课计划");
+					btn2.setText("已选列表");
+					renewList();
+					break;
+				}
 				
 			}
 			
-		};
- 		table2.getColumnModel().getColumn(9).setCellRenderer(new TableButtonRender("选课"));
-		editor1 = new TableButtonEditor(e1, "选课");
-		table2.getColumnModel().getColumn(9).setCellEditor(editor1);
-		
-		e2 = new TableEvent() {
-
-			@Override
-			public void invoke(ActionEvent e) {
-				TableButton button = (TableButton)e.getSource();
-				user.removePreselectedList((String) table2.getModel().getValueAt(button.getRow(), 1));
-				renewList1();
-				renewList2();
-			}
-			
-		};
- 		table2.getColumnModel().getColumn(10).setCellRenderer(new TableButtonRender("删除"));
-		editor2 = new TableButtonEditor(e2, "删除");
-		table2.getColumnModel().getColumn(10).setCellEditor(editor2);
-		renewList2();
-		
-		JScrollPane scrollPane3 = new JScrollPane();
-		scrollPane3.setBounds(14, 517, 922 , 405);
-		contentPane1.add(scrollPane3);
-		
-		table3 = new JTable();
-		scrollPane3.setViewportView(table3);
-		table3.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"课程名",
-				"课程号",
-				"课程类别",
-				"学分",
-				"教师",
-				"班号",
-				"开课单位",
-				"课程时间",
-				"限选/已选",
-				"退课"
-			}
-		){
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override  
-            public boolean isCellEditable(int row,int column){  
-                if (column < 9) return false; else return true;
-            }
 		});
-		table3.setEnabled(true);
-		
-		JLabel label1 = new JLabel("\u7B5B\u9009\u8BFE\u7A0B");
-		label1.setBounds(14, 44, 72, 18);
-		contentPane1.add(label1);
-		
-		label2 = new JLabel("\u9884\u9009\u5217\u8868");
-		label2.setBounds(946, 44, 72, 18);
-		contentPane1.add(label2);
-		
-		label3 = new JLabel("\u5DF2\u9009\u5217\u8868");
-		label3.setBounds(14, 493, 72, 18);
-		contentPane1.add(label3);
-		table3.getColumnModel().getColumn(0).setPreferredWidth(100);
-		table3.getColumnModel().getColumn(1).setPreferredWidth(100);
-		table3.getColumnModel().getColumn(2).setPreferredWidth(60);
-		table3.getColumnModel().getColumn(3).setPreferredWidth(30);
-		table3.getColumnModel().getColumn(4).setPreferredWidth(60);
-		table3.getColumnModel().getColumn(5).setPreferredWidth(30);
-		table3.getColumnModel().getColumn(6).setPreferredWidth(100);
-		table3.getColumnModel().getColumn(7).setPreferredWidth(100);
-		table3.getColumnModel().getColumn(8).setPreferredWidth(60);
-		table3.getColumnModel().getColumn(9).setPreferredWidth(50);
-		renewList3();
+		renewList();
 	}
 	
-	void renewList1() {
+	void renewList() {
 		File dir = new File(Environment.coursePath);
 		File[] files = dir.listFiles();
-		DefaultTableModel tableModel = (DefaultTableModel) table1.getModel();
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setRowCount(0);
 		for (File cur : files) {
 			Vector<Object> arr = new Vector<Object>();
@@ -286,102 +351,135 @@ public class MainFrame extends JFrame {
 	         
 	        Gson gson = new Gson();
 	        Course course = gson.fromJson(buffer.toString(), Course.class); 
-	        if (!(this.user.getSelected().contains(course.getCourseID()) || (this.user.getPreselected().contains(course.getCourseID())))) {
-				arr.add(course.getName());
-				arr.add(course.getCourseID());
-				arr.add(course.getType());
-				arr.add(course.getCredit());
-				arr.add(course.getTeacherName());
-				arr.add(course.getClassID());
-				arr.add(course.getDepartment());
-				arr.add(course.getClassTime().toString());
-				arr.add(Integer.toString(course.getCurNumber()) + '/' + Integer.toString(course.getMaxNumber()));
-				tableModel.addRow(arr);
+	        
+	        switch (nowState) {
+		        case 0: 
+		        	if (!(this.user.getSelected().contains(course.getCourseID()) || (this.user.getPreselected().contains(course.getCourseID())))) {
+		        	    arr.add(course.getName());
+						arr.add(course.getCourseID());
+						arr.add(course.getType());
+						arr.add(course.getCredit());
+						arr.add(course.getTeacherName());
+						arr.add(course.getClassID());
+						arr.add(course.getDepartment());
+						arr.add(course.getClassTime().toString());
+						arr.add(Integer.toString(course.getCurNumber()) + '/' + Integer.toString(course.getMaxNumber()));
+						tableModel.addRow(arr);
+			        }
+		        	break;
+		        case 1:
+		        	if (this.user.getPreselected().contains(course.getCourseID())) {
+		        	    arr.add(course.getName());
+						arr.add(course.getCourseID());
+						arr.add(course.getType());
+						arr.add(course.getCredit());
+						arr.add(course.getTeacherName());
+						arr.add(course.getClassID());
+						arr.add(course.getDepartment());
+						arr.add(course.getClassTime().toString());
+						arr.add(Integer.toString(course.getCurNumber()) + '/' + Integer.toString(course.getMaxNumber()));
+						tableModel.addRow(arr);
+			        }
+		        	break;
+		        case 2:
+		        	if (this.user.getSelected().contains(course.getCourseID())) {
+		        	    arr.add(course.getName());
+						arr.add(course.getCourseID());
+						arr.add(course.getType());
+						arr.add(course.getCredit());
+						arr.add(course.getTeacherName());
+						arr.add(course.getClassID());
+						arr.add(course.getDepartment());
+						arr.add(course.getClassTime().toString());
+						arr.add(Integer.toString(course.getCurNumber()) + '/' + Integer.toString(course.getMaxNumber()));
+						tableModel.addRow(arr);
+			        }
+		        	break;
 	        }
 		}
 	
-		table1.validate();
-		table1.updateUI();
+		tableModel.fireTableDataChanged();
 	}
 	
-	void renewList2() {
-		DefaultTableModel tableModel = (DefaultTableModel) table2.getModel();
-		tableModel.setRowCount(0);
-		for (String courseName : user.getPreselected()) {
-			File cur = new File(Environment.coursePath + courseName + ".json");
-			Vector<Object> arr = new Vector<Object>();
-			
-	        Scanner scanner = null;
-	        StringBuilder buffer = new StringBuilder();
-	        try {
-	            scanner = new Scanner(cur, "utf-8");
-	            while (scanner.hasNextLine()) {
-	                buffer.append(scanner.nextLine());
-	            }
-	 
-	        } catch (FileNotFoundException e) { 
-	 
-	        } finally {
-	            if (scanner != null) {
-	                scanner.close();
-	            }
-	        }
-	         
-	        Gson gson = new Gson();
-	        Course course = gson.fromJson(buffer.toString(), Course.class); 
-	        arr.add(course.getName());
-	        arr.add(course.getCourseID());
-			arr.add(course.getType());
-			arr.add(course.getCredit());
-			arr.add(course.getTeacherName());
-			arr.add(course.getClassID());
-			arr.add(course.getDepartment());
-			arr.add(course.getClassTime().toString());
-			arr.add(Integer.toString(course.getCurNumber()) + '/' + Integer.toString(course.getMaxNumber()));
-			tableModel.addRow(arr);
-		}
-	
-		table2.validate();
-		table2.updateUI();
+	private class GBC extends GridBagConstraints  
+	{  
+	   /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+	//��ʼ�����Ͻ�λ��  
+	   public GBC(int gridx, int gridy)  
+	   {  
+	      this.gridx = gridx;  
+	      this.gridy = gridy;  
+	   }  
+	  
+	   //��ʼ�����Ͻ�λ�ú���ռ����������  
+	   public GBC(int gridx, int gridy, int gridwidth, int gridheight)  
+	   {  
+	      this.gridx = gridx;  
+	      this.gridy = gridy;  
+	      this.gridwidth = gridwidth;  
+	      this.gridheight = gridheight;  
+	   }  
+	  
+	   //���뷽ʽ  
+	   public GBC setAnchor(int anchor)  
+	   {  
+	      this.anchor = anchor;  
+	      return this;  
+	   }  
+	  
+	   //�Ƿ����켰���췽��  
+	   public GBC setFill(int fill)  
+	   {  
+	      this.fill = fill;  
+	      return this;  
+	   }  
+	  
+	   //x��y�����ϵ�����  
+	   public GBC setWeight(double weightx, double weighty)  
+	   {  
+	      this.weightx = weightx;  
+	      this.weighty = weighty;  
+	      return this;  
+	   }  
+	  
+	   //�ⲿ���  
+	   public GBC setInsets(int distance)  
+	   {  
+	      this.insets = new Insets(distance, distance, distance, distance);  
+	      return this;  
+	   }  
+	  
+	   //�����  
+	   public GBC setInsets(int top, int left, int bottom, int right)  
+	   {  
+	      this.insets = new Insets(top, left, bottom, right);  
+	      return this;  
+	   }  
+	  
+	   //�����  
+	   public GBC setIpad(int ipadx, int ipady)  
+	   {  
+	      this.ipadx = ipadx;  
+	      this.ipady = ipady;  
+	      return this;  
+	   }  
 	}
-	
-	void renewList3() {
-		DefaultTableModel tableModel = (DefaultTableModel) table3.getModel();
-		tableModel.setRowCount(0);
-		for (String courseName : user.getSelected()) {
-			File cur = new File(Environment.coursePath + courseName + ".json");
-			Vector<Object> arr = new Vector<Object>();
-			
-	        Scanner scanner = null;
-	        StringBuilder buffer = new StringBuilder();
-	        try {
-	            scanner = new Scanner(cur, "utf-8");
-	            while (scanner.hasNextLine()) {
-	                buffer.append(scanner.nextLine());
-	            }
-	 
-	        } catch (FileNotFoundException e) { 
-	 
-	        } finally {
-	            if (scanner != null) {
-	                scanner.close();
-	            }
-	        }
-	         
-	        Gson gson = new Gson();
-	        Course course = gson.fromJson(buffer.toString(), Course.class); 
-	        arr.add(course.getName());
-	        arr.add(course.getCourseID());
-			arr.add(course.getType());
-			arr.add(course.getCredit());
-			arr.add(course.getTeacherName());
-			arr.add(course.getClassID());
-			arr.add(course.getDepartment());
-			arr.add(course.getClassTime().toString());
-			arr.add(Integer.toString(course.getCurNumber()) + '/' + Integer.toString(course.getMaxNumber()));
-			tableModel.addRow(arr);
+
+	private class TimeControlListener implements ActionListener {
+		JFrame ref;
+		
+		TimeControlListener(JFrame _ref) {
+			ref = _ref;
 		}
-		table3.validate();
-		table3.updateUI();
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			ref.setTitle("课程管理 - " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
+		}
+		
 	}
 }
