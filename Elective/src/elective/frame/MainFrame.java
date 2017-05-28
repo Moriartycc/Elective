@@ -49,6 +49,7 @@ import data.element.Course;
 import data.element.Student;
 import data.environment.Environment;
 import data.exception.CourseException;
+import elective.Main;
 
 import java.awt.Toolkit;
 import javax.swing.JLabel;
@@ -58,15 +59,16 @@ public class MainFrame extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane, panel1, panel2, panel3, panel4, panelScroll;
-	private JButton btn1, btn2;
-	private JTable table;
+	private JPanel contentPane, panel1, panel2, panel3, panel4, panelScroll, panelTimetable;
+	private JButton btn1, btn2, btn3;
+	private JTable table, timeTable;
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu Menu1 = new JMenu("操作(A)"), Menu2 = new JMenu("帮助(H)");
 	private Student user;
 	ArrayList<String> planSelectedList = new ArrayList<String>();
-	private int nowState = 0; // 0-选课计划, 1-预选列表, 2-已选列表
-	
+	private byte nowState = 0; // 0-选课计划, 1-预选列表, 2-已选列表
+	private byte dispState = 0; //0-不显示显示, 1-显示
+
 	public MainFrame(Student _user) {
 		this.user = _user;
 		
@@ -99,9 +101,16 @@ public class MainFrame extends JFrame {
 		panelScroll = new JPanel();
 		panelScroll.setLayout(new BorderLayout());
 		panelScroll.setBorder(BorderFactory.createTitledBorder(null, "课程列表", TitledBorder.LEADING, TitledBorder.TOP, new Font("Dialog", Font.PLAIN, 12), new Color(51, 51, 51)));
-		
+		panelTimetable = new JPanel();
+		panelTimetable.setLayout(new BorderLayout());
+		panelTimetable.setBorder(BorderFactory.createTitledBorder(null, "课表", TitledBorder.LEADING, TitledBorder.TOP, new Font("Dialog", Font.PLAIN, 12), new Color(51, 51, 51)));
+
+
 		table = new JTable();
+		timeTable = new JTable();
 		JScrollPane scrollPane = new JScrollPane(table);
+		JScrollPane timeTablePanel = new JScrollPane(timeTable);
+		panelTimetable.add(timeTablePanel, BorderLayout.CENTER);
 		panelScroll.add(scrollPane, BorderLayout.CENTER);
 		contentPane.add(panel1, new GBC(0,0,7,1).setFill(GBC.BOTH).setWeight(5, 5));
 		contentPane.add(panel3, new GBC(0,1,1,6).setFill(GBC.BOTH).setWeight(5, 100));
@@ -111,11 +120,13 @@ public class MainFrame extends JFrame {
 		
 		btn1 = new JButton("预选列表");
 		btn2 = new JButton("已选列表");
+		btn3 = new JButton("展开课表");
 		panel2.add(btn1, BorderLayout.WEST);
 		panel2.add(btn2, BorderLayout.EAST);
 		panel2.add(new JLabel("西京大学选课系统 Version 0.2", JLabel.CENTER), BorderLayout.SOUTH);
 		panel1.add(new JLabel("选课计划", JLabel.CENTER), BorderLayout.CENTER);
-		
+		panel1.add(btn3, BorderLayout.WEST);
+
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -302,6 +313,29 @@ public class MainFrame extends JFrame {
 				}
 			}
 		});
+
+		timeTable.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+						"周一",
+						"周二",
+						"周三",
+						"周四",
+						"周五",
+						"周六",
+						"周日",
+				}
+		){
+			/**
+			 *
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		});
 		
 		btn1.addActionListener(new ActionListener() {
 
@@ -364,6 +398,27 @@ public class MainFrame extends JFrame {
 				
 			}
 			
+		});
+		btn3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				switch(dispState){
+					case 0:
+						dispState = 1;
+						btn3.setText("收起课表");
+						setSize(1200, 600);
+						contentPane.add(panelTimetable, new GBC(8,1,5,5).setFill(GBC.BOTH).setWeight(120, 100));
+						break;
+					case 1:
+						dispState = 0;
+						btn3.setText("展开课表");
+						setSize(800, 600);
+						contentPane.remove(5);
+						break;
+				}
+//				JOptionPane.showMessageDialog(MainFrame.this.getContentPane(), "-1s", "错误", 0);
+				return;
+			}
 		});
 		renewList();
 	}
