@@ -144,6 +144,10 @@ public class Main extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Student user = null;
+			if (!textField2.getText().equals("123")) {
+				JOptionPane.showMessageDialog(getContentPane(),"密码错误！", "错误", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 			try {
 				user = login(textField1.getText());
 			} catch (FileNotFoundException _e) {

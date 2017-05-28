@@ -14,6 +14,7 @@ import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -47,6 +48,7 @@ import com.google.gson.Gson;
 import data.element.Course;
 import data.element.Student;
 import data.environment.Environment;
+import data.exception.CourseException;
 
 import java.awt.Toolkit;
 import javax.swing.JLabel;
@@ -119,7 +121,7 @@ public class MainFrame extends JFrame {
 			},
 			new String[] {
 				"课程名",
-				"课程号",
+				"",
 				"课程类别",
 				"学分",
 				"教师",
@@ -138,6 +140,12 @@ public class MainFrame extends JFrame {
 				return false;
 			}
 		});
+		table.getColumnModel().getColumn(1).setMaxWidth(0);
+		table.getColumnModel().getColumn(1).setMinWidth(0);
+		table.getColumnModel().getColumn(1).setWidth(0);
+		table.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
+		table.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
+		table.getColumnModel().getColumn(7).setPreferredWidth(160);
 		table.setEnabled(true);
 		table.setColumnSelectionAllowed(false);
 		table.setRowSelectionAllowed(true);
@@ -172,14 +180,29 @@ public class MainFrame extends JFrame {
 		                }  
 
 		                popMenu.add(new JMenuItem("详细信息"));  
+		                ((JMenuItem) popMenu.getComponent(0)).addActionListener(new ActionListener() {
+
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								DetailedFrame detailedFrame = new DetailedFrame((String) table.getModel().getValueAt(table.getSelectedRow(), 1));
+								detailedFrame.setVisible(true);
+								detailedFrame.setResizable(true);
+							}
+		                	
+		                });
 		                popMenu.show(e.getComponent(), e.getX(), e.getY());  
 		            } 
 					break;
 				case 1:
 					if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
-						user.removePreselectedList((String) table.getModel().getValueAt(table.getSelectedRow(), 1));
-						user.addSelectedList((String) table.getModel().getValueAt(table.getSelectedRow(), 1));
-						renewList();
+						try {
+							user.addSelectedList((String) table.getModel().getValueAt(table.getSelectedRow(), 1));
+							user.removePreselectedList((String) table.getModel().getValueAt(table.getSelectedRow(), 1));
+							renewList();
+						} catch (CourseException ce) {
+							JOptionPane.showMessageDialog(getContentPane(),"选课失败！" + ce.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
+						}
+					
 					} else if (SwingUtilities.isRightMouseButton(e)) {  
 		                JPopupMenu popMenu = new JPopupMenu();  
 		                JTable table = (JTable) e.getComponent();  
@@ -204,6 +227,16 @@ public class MainFrame extends JFrame {
 		                }  
 
 		                popMenu.add(new JMenuItem("详细信息"));  
+		                ((JMenuItem) popMenu.getComponent(0)).addActionListener(new ActionListener() {
+
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								DetailedFrame detailedFrame = new DetailedFrame((String) table.getModel().getValueAt(table.getSelectedRow(), 1));
+								detailedFrame.setVisible(true);
+								detailedFrame.setResizable(true);
+							}
+		                	
+		                });
 		                popMenu.add(new JMenuItem("移出预选列表"));
 		                ((JMenuItem) popMenu.getComponent(1)).addActionListener(new ActionListener() {
 
@@ -242,6 +275,16 @@ public class MainFrame extends JFrame {
 		                }  
 
 		                popMenu.add(new JMenuItem("详细信息"));  
+		                ((JMenuItem) popMenu.getComponent(0)).addActionListener(new ActionListener() {
+
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								DetailedFrame detailedFrame = new DetailedFrame((String) table.getModel().getValueAt(table.getSelectedRow(), 1));
+								detailedFrame.setVisible(true);
+								detailedFrame.setResizable(true);
+							}
+		                	
+		                });
 		                popMenu.add(new JMenuItem("移出已选列表"));
 		                ((JMenuItem) popMenu.getComponent(1)).addActionListener(new ActionListener() {
 
@@ -356,13 +399,13 @@ public class MainFrame extends JFrame {
 		        case 0: 
 		        	if (!(this.user.getSelected().contains(course.getCourseID()) || (this.user.getPreselected().contains(course.getCourseID())))) {
 		        	    arr.add(course.getName());
-						arr.add(course.getCourseID());
+		        	    arr.add(course.getCourseID());
 						arr.add(course.getType());
 						arr.add(course.getCredit());
 						arr.add(course.getTeacherName());
 						arr.add(course.getClassID());
 						arr.add(course.getDepartment());
-						arr.add(course.getClassTime().toString());
+						arr.add(course.getClassTimeString());
 						arr.add(Integer.toString(course.getCurNumber()) + '/' + Integer.toString(course.getMaxNumber()));
 						tableModel.addRow(arr);
 			        }
@@ -370,13 +413,13 @@ public class MainFrame extends JFrame {
 		        case 1:
 		        	if (this.user.getPreselected().contains(course.getCourseID())) {
 		        	    arr.add(course.getName());
-						arr.add(course.getCourseID());
+		        	    arr.add(course.getCourseID());
 						arr.add(course.getType());
 						arr.add(course.getCredit());
 						arr.add(course.getTeacherName());
 						arr.add(course.getClassID());
 						arr.add(course.getDepartment());
-						arr.add(course.getClassTime().toString());
+						arr.add(course.getClassTimeString());
 						arr.add(Integer.toString(course.getCurNumber()) + '/' + Integer.toString(course.getMaxNumber()));
 						tableModel.addRow(arr);
 			        }
@@ -384,13 +427,13 @@ public class MainFrame extends JFrame {
 		        case 2:
 		        	if (this.user.getSelected().contains(course.getCourseID())) {
 		        	    arr.add(course.getName());
-						arr.add(course.getCourseID());
+		        	    arr.add(course.getCourseID());
 						arr.add(course.getType());
 						arr.add(course.getCredit());
 						arr.add(course.getTeacherName());
 						arr.add(course.getClassID());
 						arr.add(course.getDepartment());
-						arr.add(course.getClassTime().toString());
+						arr.add(course.getClassTimeString());
 						arr.add(Integer.toString(course.getCurNumber()) + '/' + Integer.toString(course.getMaxNumber()));
 						tableModel.addRow(arr);
 			        }
