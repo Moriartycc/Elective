@@ -29,10 +29,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,7 +70,7 @@ public class MainFrame extends JFrame {
 	private JTable table, timeTable;
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu Menu1 = new JMenu("操作(F)"), Menu2 = new JMenu("帮助(H)");
-	private JMenuItem advancedFilter = new JMenuItem("高级筛选信息(A)"), exportTimetable = new JMenuItem("导出课程表(E)");
+	private JMenuItem advancedFilter = new JMenuItem("高级筛选信息(A)"), exportTimetable = new JMenuItem("导出课程表(E)"), helpUnit = new JMenuItem("操作提示");
 	private Student user;
 	ArrayList<String> planSelectedList = new ArrayList<String>();
 	private byte nowState = 0; // 0-选课计划, 1-预选列表, 2-已选列表
@@ -74,6 +78,7 @@ public class MainFrame extends JFrame {
 	private FilterFrame filterFrame = new FilterFrame(this);
 	private Timer timer;
 	private MainFrame mainFrame;
+	private HelpFrame helpFrame = new HelpFrame();
 
 	public MainFrame(Student _user) {
 		this.user = _user;
@@ -96,8 +101,18 @@ public class MainFrame extends JFrame {
 		advancedFilter.setMnemonic('A');
 		exportTimetable.setFont(new Font("宋体",Font.PLAIN, 12));
 		exportTimetable.setMnemonic('E');
+		helpUnit.setFont(new Font("宋体",Font.PLAIN, 12));
 		Menu1.add(advancedFilter);
 		Menu1.add(exportTimetable);
+		Menu2.add(helpUnit);
+		helpUnit.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				helpFrame.setVisible(true);
+			}
+			
+		});
 		advancedFilter.addActionListener(new ActionListener(){
 
 			@Override
@@ -112,7 +127,7 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser fileChooser = new JFileChooser();  
 				FileNameExtensionFilter filter = new FileNameExtensionFilter(  
-			            "表格文件(*.xlsx)", "xlsx"); 
+			            "HTML文件(*.html)", "html"); 
 				fileChooser.setFileFilter(filter);
 				fileChooser.setDialogTitle("保存课表");
 				int option = fileChooser.showSaveDialog(mainFrame);  
@@ -123,12 +138,74 @@ public class MainFrame extends JFrame {
 			        String fname = fileChooser.getName(file);   //从文件名输入框中获取文件名  
 			          
 			        //假如用户填写的文件名不带我们制定的后缀名，那么我们给它添上后缀  
-			        if(fname.indexOf(".xlsx")==-1) file = new File(fileChooser.getCurrentDirectory(),fname+".xlsx");  
+			        if(fname.indexOf(".html")==-1) file = new File(fileChooser.getCurrentDirectory(),fname+".html");  
 			          
 			        try {  
-			            FileOutputStream fos = new FileOutputStream(file);  
-			              
-			            fos.close();  
+			        	File curSample = new File(Environment.samplePath + "Sample.html");
+			    		
+			    		Scanner scanner = null;
+			            StringBuilder buffer = new StringBuilder();
+			            try {
+			                scanner = new Scanner(curSample, "utf-8");
+			                while (scanner.hasNextLine()) {
+			                    buffer.append(scanner.nextLine());
+			                }
+			     
+			            } catch (FileNotFoundException e1) { 
+			     
+			            } finally {
+			                if (scanner != null) {
+			                    scanner.close();
+			                }
+			            }
+			            buffer.replace(buffer.indexOf("UserName"), buffer.indexOf("UserName") + 8, user.getName());
+			        	
+			            File dir = new File(Environment.coursePath);
+			    		File[] files = dir.listFiles();
+			    		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+			    		tableModel.setRowCount(0);
+			    		for (File cur : files) {
+			    			Vector<Object> arr = new Vector<Object>();
+			    			
+			    	        scanner = null;
+			    	        StringBuilder buffer1 = new StringBuilder();
+			    	        try {
+			    	            scanner = new Scanner(cur, "utf-8");
+			    	            while (scanner.hasNextLine()) {
+			    	                buffer1.append(scanner.nextLine());
+			    	            }
+			    	 
+			    	        } catch (FileNotFoundException e1) { 
+			    	 
+			    	        } finally {
+			    	            if (scanner != null) {
+			    	                scanner.close();
+			    	            }
+			    	        }
+			    	         
+			    	        Gson gson = new Gson();
+			    	        Course course = gson.fromJson(buffer1.toString(), Course.class); 
+			    	        
+			    	        if (user.getSelected().contains(course.getCourseID())) {
+			    	        	for (int i : course.getClassTime()) {
+				    	        	String label = "TBLABEL" + i % 12 + i / 12;
+				    	        	buffer.replace(buffer.indexOf(label), buffer.indexOf(label) + label.length(), course.getName() + "<br />（" + course.getTeacherName() + " " + course.getClassID() + "班）");
+			    	        	}
+			    	        }
+			    		}
+			    		
+			    		for (int i = 0; i < 84; i++) {
+			    			String label = "TBLABEL" + i % 12 + i / 12;
+			    			if (buffer.indexOf(label) >= 0) {
+			    				buffer.replace(buffer.indexOf(label), buffer.indexOf(label) + label.length(), "");
+			    			}
+			    		}
+			            
+			            FileOutputStream fos = new FileOutputStream(file);   
+			            @SuppressWarnings("resource")
+						OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");   
+			            osw.write(buffer.toString());   
+			            osw.flush();  
 			              
 			        } catch (IOException e1) {  
 			            e1.printStackTrace();  
@@ -608,10 +685,10 @@ public class MainFrame extends JFrame {
         	   for (int i : course.getClassTime()) {
         		   EventQueue.invokeLater(new Runnable() {
     			      @Override public void run() {
-    			        timeTable.setRowHeight(i % 12, 60);
+    			        timeTable.setRowHeight(i % 12, 200);
     			      }
     			    });
-        		   timeTableData[i % 12].setElementAt("<html><center><font color=rgb(" + r + ',' + g + ',' + b + ")>" + course.getName() + "<br />（" + course.getTeacherName() + " " + course.getClassID() + "班）</font></center></html>", i / 12 + 1);
+        		   timeTableData[i % 12].setElementAt("<html><div align=\"center\"><font color=rgb(" + r + ',' + g + ',' + b + ")>" + course.getName() + "<br />（" + course.getTeacherName() + " " + course.getClassID() + "班）</font></div></html>", i / 12 + 1);
         	   }
 	        }
 		}
