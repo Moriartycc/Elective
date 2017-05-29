@@ -120,6 +120,7 @@ public class DetailedFrame extends JFrame {
 		informationText.setLineWrap(true);
 		informationText.setWrapStyleWord(true);
 		informationText.setOpaque(false);
+		informationText.setFont(((JLabel) subPanelName.getComponent(0)).getFont());
 		subPanelInformation.add(informationText, BorderLayout.CENTER);
 		
 		panel.add(subPanelName, new GBC(0,0,3,1).setFill(GBC.BOTH).setWeight(100, 5));

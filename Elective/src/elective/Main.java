@@ -17,6 +17,8 @@ import elective.frame.MainFrame;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.awt.event.ActionEvent;
@@ -119,18 +121,22 @@ public class Main extends JFrame {
 		
 		textField1 = new JTextField();
 		textField1.setBounds(148, 55, 192, 24);
-		contentPane.add(textField1);
 		textField1.setColumns(10);
+		textField1.addKeyListener(new KeyHandler(this));
+		contentPane.add(textField1);
 		
 		textField2 = new JPasswordField();
 		textField2.setColumns(10);
 		textField2.setBounds(148, 95, 192, 24);
+		textField2.addKeyListener(new KeyHandler(this));
 		contentPane.add(textField2);
 		
 		textField3 = new JTextField();
 		textField3.setColumns(10);
 		textField3.setBounds(148, 135, 192, 24);
+		textField3.addKeyListener(new KeyHandler(this));
 		contentPane.add(textField3);
+		
 	}
 	
 	private class Button1Handler implements ActionListener
@@ -159,5 +165,48 @@ public class Main extends JFrame {
 			mainFrame.setResizable(true);
 			ref.dispose();
 		}
+
+	}
+	
+	private class KeyHandler implements KeyListener {
+		
+		private Main ref;
+		
+		KeyHandler(Main _ref) {
+			ref = _ref;
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() != KeyEvent.VK_ENTER) return;
+			Student user = null;
+			if (!textField2.getText().equals("123")) {
+				JOptionPane.showMessageDialog(getContentPane(),"密码错误！", "错误", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			try {
+				user = login(textField1.getText());
+			} catch (FileNotFoundException _e) {
+				JOptionPane.showMessageDialog(getContentPane(),"该学号不存在，请重试！", "错误", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			JFrame mainFrame = new MainFrame(user);
+			mainFrame.setVisible(true);
+			mainFrame.setResizable(true);
+			ref.dispose();
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 }

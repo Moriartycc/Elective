@@ -146,7 +146,6 @@ public class Course {
 	}
 	
 	public static void withdraw(String _course) {
-		System.out.println(_course);
 		File cur = new File(Environment.coursePath + _course + ".json");
 		
 		Scanner scanner = null;

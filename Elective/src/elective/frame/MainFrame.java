@@ -22,6 +22,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
@@ -60,8 +61,9 @@ public class MainFrame extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane, panel1, panel2, panel3, panel4, panelScroll, panelTimetable, panelTimetableUp, panelTimetableDown;
-	private JButton btn1, btn2, btn3, btn4;
+	private JPanel contentPane, panel1, panel2, panel3, panel4, panelFilter, panelScroll, panelTimetable, panelTimetableUp, panelTimetableDown;
+	private JButton btn1, btn2, btn3;
+	private JTextField filter;
 	private JTable table, timeTable;
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu Menu1 = new JMenu("操作(A)"), Menu2 = new JMenu("帮助(H)");
@@ -75,7 +77,7 @@ public class MainFrame extends JFrame {
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/com/sun/javafx/scene/web/skin/IncreaseIndent_16x16_JFX.png")));
 		setTitle("课程管理 - " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
-		new Timer(1000, new TimeControlListener(this)).start();
+		new Timer(800, new TimeControlListener(this)).start();
 		setBounds(100, 100, 800, 600);
 		setJMenuBar(menuBar);
 		Menu1.setFont(new Font("宋体",Font.PLAIN, 12));
@@ -111,30 +113,33 @@ public class MainFrame extends JFrame {
 		panelTimetable = new JPanel();
 		panelTimetable.setLayout(new BorderLayout());
 		panelTimetable.setBorder(BorderFactory.createTitledBorder(null, "课表", TitledBorder.LEADING, TitledBorder.TOP, new Font("Dialog", Font.PLAIN, 12), new Color(51, 51, 51)));
-
-
+		panelFilter = new JPanel();
+		panelFilter.setLayout(new BorderLayout());
+		panelFilter.setBorder(BorderFactory.createTitledBorder(null, "筛选信息", TitledBorder.LEADING, TitledBorder.TOP, new Font("Dialog", Font.PLAIN, 12), new Color(51, 51, 51)));
+		
 		table = new JTable();
 		timeTable = new JTable();
 		JScrollPane scrollPane = new JScrollPane(table);
 		JScrollPane timeTablePanel = new JScrollPane(timeTable);
 		panelTimetable.add(timeTablePanel, BorderLayout.CENTER);
 		panelScroll.add(scrollPane, BorderLayout.CENTER);
-		contentPane.add(panel1, new GBC(0,0,7,1).setFill(GBC.BOTH).setWeight(5, 5));
-		contentPane.add(panel3, new GBC(0,1,1,6).setFill(GBC.BOTH).setWeight(5, 100));
+		contentPane.add(panel1, new GBC(1,0,5,1).setFill(GBC.BOTH).setWeight(100, 0));
+		contentPane.add(panel3, new GBC(0,0,1,7).setFill(GBC.BOTH).setWeight(5, 100));
 		contentPane.add(panelScroll, new GBC(1,1,5,5).setFill(GBC.BOTH).setWeight(100, 100));
-		contentPane.add(panel4, new GBC(6,1,1,6).setFill(GBC.BOTH).setWeight(5, 100));
-		contentPane.add(panel2, new GBC(1,6,5,1).setFill(GBC.BOTH).setWeight(5, 5));
+		contentPane.add(panel4, new GBC(6,0,1,7).setFill(GBC.BOTH).setWeight(5, 100));
+		contentPane.add(panel2, new GBC(1,6,5,1).setFill(GBC.BOTH).setWeight(100, 0));
 		
 		btn1 = new JButton("预选列表");
 		btn2 = new JButton("已选列表");
 		btn3 = new JButton("展开课表");
-		btn4 = new JButton("筛选课程");
+		filter = new JTextField(10);
 		panel2.add(btn1, BorderLayout.WEST);
 		panel2.add(btn2, BorderLayout.EAST);
 		panel2.add(new JLabel("西京大学选课系统 Version 0.2", JLabel.CENTER), BorderLayout.SOUTH);
 		panel1.add(new JLabel("选课计划", JLabel.CENTER), BorderLayout.CENTER);
 		panel1.add(btn3, BorderLayout.EAST);
-		panel1.add(btn4, BorderLayout.WEST);
+		panelFilter.add(filter, BorderLayout.CENTER);
+		panel1.add(panelFilter, BorderLayout.WEST);
 
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -421,8 +426,8 @@ public class MainFrame extends JFrame {
 						btn3.setText("收起课表");
 						setSize(getSize().width * 2, getSize().height);
 						contentPane.add(panelTimetable, new GBC(8,1,5,5).setFill(GBC.BOTH).setWeight(100, 100));
-						contentPane.add(panelTimetableUp, new GBC(7,0,7,1).setFill(GBC.BOTH).setWeight(5, 100));
-						contentPane.add(panelTimetableDown, new GBC(7,6,7,1).setFill(GBC.BOTH).setWeight(5, 100));
+						contentPane.add(panelTimetableUp, new GBC(7,0,7,1).setFill(GBC.BOTH).setWeight(100, 0));
+						contentPane.add(panelTimetableDown, new GBC(7,6,7,1).setFill(GBC.BOTH).setWeight(100, 0));
 						break;
 					case 1:
 						dispState = 0;
@@ -469,7 +474,7 @@ public class MainFrame extends JFrame {
 	        
 	        switch (nowState) {
 		        case 0: 
-		        	if (!(this.user.getSelected().contains(course.getCourseID()) || (this.user.getPreselected().contains(course.getCourseID())))) {
+		        	if (!(this.user.getSelected().contains(course.getCourseID()) || (this.user.getPreselected().contains(course.getCourseID()))) && filterCheck(course)) {
 		        	    arr.add(course.getName());
 		        	    arr.add(course.getCourseID());
 						arr.add(course.getType());
@@ -567,6 +572,13 @@ public class MainFrame extends JFrame {
 		((JLabel) panelTimetableDown.getComponent(0)).setText("已选学分/限选学分：" + user.getCurCredit() + '/' + user.getMaxCredit());
 	}
 	
+	private boolean filterCheck(Course _course) {
+		boolean ret = false;
+		ret = (_course.getName().indexOf(filter.getText()) >= 0) || (_course.getCourseID().indexOf(filter.getText()) >= 0) || (_course.getTeacherName().indexOf(filter.getText()) >= 0) || 
+				(_course.getType().indexOf(filter.getText()) >= 0) || (_course.getDepartment().indexOf(filter.getText()) >= 0) || (_course.getClassTimeString().indexOf(filter.getText()) >= 0);
+		return ret;
+	}
+	
 	private class GBC extends GridBagConstraints  
 	{  
 	   /**
@@ -645,6 +657,7 @@ public class MainFrame extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			ref.setTitle("课程管理 - " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
+			renewTable();
 		}
 		
 	}
