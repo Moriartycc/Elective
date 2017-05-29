@@ -623,13 +623,13 @@ public class MainFrame extends JFrame {
 	
 	private boolean filterCheck(Course _course) {
 		boolean ret = false;
-		ret = (_course.getName().indexOf(filter.getText()) >= 0) || (_course.getCourseID().indexOf(filter.getText()) >= 0) || (_course.getTeacherName().indexOf(filter.getText()) >= 0) || 
+		ret = (_course.getName().indexOf(filter.getText()) >= 0) || (_course.getCourseID().indexOf(filter.getText()) >= 0) || (_course.getTeacherName() != null && _course.getTeacherName().indexOf(filter.getText()) >= 0) || 
 				(_course.getType().indexOf(filter.getText()) >= 0) || (_course.getDepartment().indexOf(filter.getText()) >= 0) || (_course.getClassTimeString().indexOf(filter.getText()) >= 0);
 		
 		if (filterFrame.isActivated()) {
 			ret  = ret && (_course.getName().indexOf(filterFrame.getName()) >= 0)
 					&& (_course.getCourseID().indexOf(filterFrame.getCourseID()) >= 0)
-					&& (_course.getTeacherName().indexOf(filterFrame.getTeacherName()) >= 0)
+					&& ((_course.getTeacherName() == null && filterFrame.getTeacherName() == "") || (_course.getTeacherName() != null && _course.getTeacherName().indexOf(filterFrame.getTeacherName()) >= 0))
 					&& (_course.getType().indexOf(filterFrame.getCourseType()) >= 0)
 					&& (_course.getDepartment().indexOf(filterFrame.getDepartment()) >= 0)
 					&& (Integer.toString(_course.getClassID()).indexOf(filterFrame.getClassID()) >= 0);
