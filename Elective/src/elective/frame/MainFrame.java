@@ -41,6 +41,7 @@ import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import com.google.gson.Gson;
@@ -59,8 +60,8 @@ public class MainFrame extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane, panel1, panel2, panel3, panel4, panelScroll, panelTimetable;
-	private JButton btn1, btn2, btn3;
+	private JPanel contentPane, panel1, panel2, panel3, panel4, panelScroll, panelTimetable, panelTimetableUp, panelTimetableDown;
+	private JButton btn1, btn2, btn3, btn4;
 	private JTable table, timeTable;
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu Menu1 = new JMenu("操作(A)"), Menu2 = new JMenu("帮助(H)");
@@ -94,10 +95,16 @@ public class MainFrame extends JFrame {
 		panel2 = new JPanel();
 		panel3 = new JPanel();
 		panel4 = new JPanel();
+		panelTimetableUp = new JPanel();
+		panelTimetableDown = new JPanel();
 		panel1.setLayout(new BorderLayout());
 		panel2.setLayout(new BorderLayout());
 		panel3.setLayout(new BorderLayout());
 		panel4.setLayout(new BorderLayout());
+		panelTimetableUp.setLayout(new BorderLayout());
+		panelTimetableDown.setLayout(new BorderLayout());
+		panelTimetableUp.add(new JLabel(user.getName() + "的课程表", JLabel.CENTER), BorderLayout.CENTER);
+		panelTimetableDown.add(new JLabel("已选学分/限选学分：" + user.getCurCredit() + '/' + user.getMaxCredit(), JLabel.CENTER), BorderLayout.CENTER);
 		panelScroll = new JPanel();
 		panelScroll.setLayout(new BorderLayout());
 		panelScroll.setBorder(BorderFactory.createTitledBorder(null, "课程列表", TitledBorder.LEADING, TitledBorder.TOP, new Font("Dialog", Font.PLAIN, 12), new Color(51, 51, 51)));
@@ -121,11 +128,13 @@ public class MainFrame extends JFrame {
 		btn1 = new JButton("预选列表");
 		btn2 = new JButton("已选列表");
 		btn3 = new JButton("展开课表");
+		btn4 = new JButton("筛选课程");
 		panel2.add(btn1, BorderLayout.WEST);
 		panel2.add(btn2, BorderLayout.EAST);
 		panel2.add(new JLabel("西京大学选课系统 Version 0.2", JLabel.CENTER), BorderLayout.SOUTH);
 		panel1.add(new JLabel("选课计划", JLabel.CENTER), BorderLayout.CENTER);
-		panel1.add(btn3, BorderLayout.WEST);
+		panel1.add(btn3, BorderLayout.EAST);
+		panel1.add(btn4, BorderLayout.WEST);
 
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -166,7 +175,7 @@ public class MainFrame extends JFrame {
 				case 0:
 					if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
 						user.addPreselectedList((String) table.getModel().getValueAt(table.getSelectedRow(), 1));
-						renewList();
+						renewTable();
 					} else if (SwingUtilities.isRightMouseButton(e)) {  
 		                JPopupMenu popMenu = new JPopupMenu();  
 		                JTable table = (JTable) e.getComponent();  
@@ -209,7 +218,7 @@ public class MainFrame extends JFrame {
 						try {
 							user.addSelectedList((String) table.getModel().getValueAt(table.getSelectedRow(), 1));
 							user.removePreselectedList((String) table.getModel().getValueAt(table.getSelectedRow(), 1));
-							renewList();
+							renewTable();
 						} catch (CourseException ce) {
 							JOptionPane.showMessageDialog(getContentPane(),"选课失败！" + ce.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
 						}
@@ -254,7 +263,7 @@ public class MainFrame extends JFrame {
 							@Override
 							public void actionPerformed(ActionEvent e) {
 								user.removePreselectedList((String) table.getModel().getValueAt(table.getSelectedRow(), 1));
-								renewList();
+								renewTable();
 							}
 		                	
 		                });
@@ -303,7 +312,7 @@ public class MainFrame extends JFrame {
 							public void actionPerformed(ActionEvent e) {
 								user.addPreselectedList((String) table.getModel().getValueAt(table.getSelectedRow(), 1));
 								user.removeSelectedList((String) table.getModel().getValueAt(table.getSelectedRow(), 1));
-								renewList();
+								renewTable();
 							}
 		                	
 		                });
@@ -318,6 +327,7 @@ public class MainFrame extends JFrame {
 				new Object[][] {
 				},
 				new String[] {
+						"节数",
 						"周一",
 						"周二",
 						"周三",
@@ -336,6 +346,9 @@ public class MainFrame extends JFrame {
 				return false;
 			}
 		});
+		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();//单元格渲染器  
+		tcr.setHorizontalAlignment(JLabel.CENTER);//居中显示  
+		timeTable.setDefaultRenderer(Object.class, tcr);//设置渲染器  
 		
 		btn1.addActionListener(new ActionListener() {
 
@@ -347,21 +360,21 @@ public class MainFrame extends JFrame {
 					((JLabel) panel1.getComponent(0)).setText("预选列表");
 					btn1.setText("选课计划");
 					btn2.setText("已选列表");
-					renewList();
+					renewTable();
 					break;
 				case 1:
 					nowState = 0;
 					((JLabel) panel1.getComponent(0)).setText("选课计划");
 					btn1.setText("预选列表");
 					btn2.setText("已选列表");
-					renewList();
+					renewTable();
 					break;
 				case 2:
 					nowState = 0;
 					((JLabel) panel1.getComponent(0)).setText("选课计划");
 					btn1.setText("预选列表");
 					btn2.setText("已选列表");
-					renewList();
+					renewTable();
 					break;
 				}
 				
@@ -378,21 +391,21 @@ public class MainFrame extends JFrame {
 					((JLabel) panel1.getComponent(0)).setText("已选列表");
 					btn1.setText("选课计划");
 					btn2.setText("预选列表");
-					renewList();
+					renewTable();
 					break;
 				case 1:
 					nowState = 2;
 					((JLabel) panel1.getComponent(0)).setText("已选列表");
 					btn1.setText("选课计划");
 					btn2.setText("预选列表");
-					renewList();
+					renewTable();
 					break;
 				case 2:
 					nowState = 1;
 					((JLabel) panel1.getComponent(0)).setText("预选列表");
 					btn1.setText("选课计划");
 					btn2.setText("已选列表");
-					renewList();
+					renewTable();
 					break;
 				}
 				
@@ -406,13 +419,17 @@ public class MainFrame extends JFrame {
 					case 0:
 						dispState = 1;
 						btn3.setText("收起课表");
-						setSize(1200, 600);
-						contentPane.add(panelTimetable, new GBC(8,1,5,5).setFill(GBC.BOTH).setWeight(120, 100));
+						setSize(getSize().width * 2, getSize().height);
+						contentPane.add(panelTimetable, new GBC(8,1,5,5).setFill(GBC.BOTH).setWeight(100, 100));
+						contentPane.add(panelTimetableUp, new GBC(7,0,7,1).setFill(GBC.BOTH).setWeight(5, 100));
+						contentPane.add(panelTimetableDown, new GBC(7,6,7,1).setFill(GBC.BOTH).setWeight(5, 100));
 						break;
 					case 1:
 						dispState = 0;
 						btn3.setText("展开课表");
-						setSize(800, 600);
+						setSize(getSize().width / 2, getSize().height);
+						contentPane.remove(7);
+						contentPane.remove(6);
 						contentPane.remove(5);
 						break;
 				}
@@ -420,10 +437,10 @@ public class MainFrame extends JFrame {
 				return;
 			}
 		});
-		renewList();
+		renewTable();
 	}
 	
-	void renewList() {
+	void renewTable() {
 		File dir = new File(Environment.coursePath);
 		File[] files = dir.listFiles();
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
@@ -497,6 +514,57 @@ public class MainFrame extends JFrame {
 		}
 	
 		tableModel.fireTableDataChanged();
+		
+		tableModel = (DefaultTableModel) timeTable.getModel();
+		tableModel.setRowCount(0);
+		
+		Vector<String>[] timeTableData = new Vector[12];
+		for (int i = 0; i < 12 ; i++) {
+			timeTableData[i] = new Vector<String>();
+			timeTableData[i].addElement(Integer.toString(i+1));
+			for (int j = 0; j < 7; j++) timeTableData[i].addElement("");
+		}
+		
+		int r = 0, g = 0, b = 2;
+		for (File cur : files) {
+			Vector<Object> arr = new Vector<Object>();
+			
+	        Scanner scanner = null;
+	        StringBuilder buffer = new StringBuilder();
+	        try {
+	            scanner = new Scanner(cur, "utf-8");
+	            while (scanner.hasNextLine()) {
+	                buffer.append(scanner.nextLine());
+	            }
+	 
+	        } catch (FileNotFoundException e) { 
+	 
+	        } finally {
+	            if (scanner != null) {
+	                scanner.close();
+	            }
+	        }
+	         
+	        Gson gson = new Gson();
+	        Course course = gson.fromJson(buffer.toString(), Course.class); 
+	        if (this.user.getSelected().contains(course.getCourseID())) {
+	           do {
+	        	   r = (r + 37) % 256; g = (g + 137) % 256; b = (b * 2) % 256;
+	           } while (r + g + b > 512);
+        	   for (int i : course.getClassTime()) {
+        		   EventQueue.invokeLater(new Runnable() {
+    			      @Override public void run() {
+    			        timeTable.setRowHeight(i % 12, 60);
+    			      }
+    			    });
+        		   timeTableData[i % 12].setElementAt("<html><center><font color=rgb(" + r + ',' + g + ',' + b + ")>" + course.getName() + "<br />（" + course.getTeacherName() + " " + course.getClassID() + "班）</font></center></html>", i / 12 + 1);
+        	   }
+	        }
+		}
+		for (int i = 0; i < 12; i++) tableModel.addRow(timeTableData[i]);
+		tableModel.fireTableDataChanged();
+		
+		((JLabel) panelTimetableDown.getComponent(0)).setText("已选学分/限选学分：" + user.getCurCredit() + '/' + user.getMaxCredit());
 	}
 	
 	private class GBC extends GridBagConstraints  
