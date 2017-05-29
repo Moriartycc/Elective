@@ -10,7 +10,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.JList;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -21,19 +21,18 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
-import java.awt.Scrollbar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.text.DecimalFormat;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,6 +41,7 @@ import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -51,7 +51,6 @@ import data.element.Course;
 import data.element.Student;
 import data.environment.Environment;
 import data.exception.CourseException;
-import elective.Main;
 
 import java.awt.Toolkit;
 import javax.swing.JLabel;
@@ -66,28 +65,78 @@ public class MainFrame extends JFrame {
 	private JTextField filter;
 	private JTable table, timeTable;
 	private JMenuBar menuBar = new JMenuBar();
-	private JMenu Menu1 = new JMenu("操作(A)"), Menu2 = new JMenu("帮助(H)");
+	private JMenu Menu1 = new JMenu("操作(F)"), Menu2 = new JMenu("帮助(H)");
+	private JMenuItem advancedFilter = new JMenuItem("高级筛选信息(A)"), exportTimetable = new JMenuItem("导出课程表(E)");
 	private Student user;
 	ArrayList<String> planSelectedList = new ArrayList<String>();
 	private byte nowState = 0; // 0-选课计划, 1-预选列表, 2-已选列表
 	private byte dispState = 0; //0-不显示显示, 1-显示
+	private FilterFrame filterFrame = new FilterFrame(this);
+	private Timer timer;
+	private MainFrame mainFrame;
 
 	public MainFrame(Student _user) {
 		this.user = _user;
-		
+		mainFrame = this;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/com/sun/javafx/scene/web/skin/IncreaseIndent_16x16_JFX.png")));
 		setTitle("课程管理 - " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
-		new Timer(800, new TimeControlListener(this)).start();
+		timer = new Timer(800, new TimeControlListener(this));
+		timer.start();
 		setBounds(100, 100, 800, 600);
 		setJMenuBar(menuBar);
 		Menu1.setFont(new Font("宋体",Font.PLAIN, 12));
 		Menu2.setFont(new Font("宋体",Font.PLAIN, 12));
-		Menu1.setMnemonic('A');
+		Menu1.setMnemonic('F');
 		Menu2.setMnemonic('H');
 		menuBar.add(Menu1);
 		menuBar.add(Menu2);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
+		advancedFilter.setFont(new Font("宋体",Font.PLAIN, 12));
+		advancedFilter.setMnemonic('A');
+		exportTimetable.setFont(new Font("宋体",Font.PLAIN, 12));
+		exportTimetable.setMnemonic('E');
+		Menu1.add(advancedFilter);
+		Menu1.add(exportTimetable);
+		advancedFilter.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				filterFrame.setVisible(true);
+			}
+			
+		});
+		exportTimetable.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fileChooser = new JFileChooser();  
+				FileNameExtensionFilter filter = new FileNameExtensionFilter(  
+			            "表格文件(*.xlsx)", "xlsx"); 
+				fileChooser.setFileFilter(filter);
+				fileChooser.setDialogTitle("保存课表");
+				int option = fileChooser.showSaveDialog(mainFrame);  
+				
+			    if (option == JFileChooser.APPROVE_OPTION){    //假如用户选择了保存  
+			        File file = fileChooser.getSelectedFile();  
+			          
+			        String fname = fileChooser.getName(file);   //从文件名输入框中获取文件名  
+			          
+			        //假如用户填写的文件名不带我们制定的后缀名，那么我们给它添上后缀  
+			        if(fname.indexOf(".xlsx")==-1) file = new File(fileChooser.getCurrentDirectory(),fname+".xlsx");  
+			          
+			        try {  
+			            FileOutputStream fos = new FileOutputStream(file);  
+			              
+			            fos.close();  
+			              
+			        } catch (IOException e1) {  
+			            e1.printStackTrace();  
+			        }     
+			    } 
+			}
+			
+		});
 		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new GridBagLayout());
@@ -576,6 +625,24 @@ public class MainFrame extends JFrame {
 		boolean ret = false;
 		ret = (_course.getName().indexOf(filter.getText()) >= 0) || (_course.getCourseID().indexOf(filter.getText()) >= 0) || (_course.getTeacherName().indexOf(filter.getText()) >= 0) || 
 				(_course.getType().indexOf(filter.getText()) >= 0) || (_course.getDepartment().indexOf(filter.getText()) >= 0) || (_course.getClassTimeString().indexOf(filter.getText()) >= 0);
+		
+		if (filterFrame.isActivated()) {
+			ret  = ret && (_course.getName().indexOf(filterFrame.getName()) >= 0)
+					&& (_course.getCourseID().indexOf(filterFrame.getCourseID()) >= 0)
+					&& (_course.getTeacherName().indexOf(filterFrame.getTeacherName()) >= 0)
+					&& (_course.getType().indexOf(filterFrame.getCourseType()) >= 0)
+					&& (_course.getDepartment().indexOf(filterFrame.getDepartment()) >= 0)
+					&& (Integer.toString(_course.getClassID()).indexOf(filterFrame.getClassID()) >= 0);
+		}
+		if (filterFrame.isDifferentFromSelected() && ret) {
+			boolean[] availableTime = user.getCurTime();
+			for (int i : _course.getClassTime()) {
+				if (!availableTime[i]) {
+					ret = false;
+					break;
+				}
+			}
+		}
 		return ret;
 	}
 	
@@ -657,7 +724,7 @@ public class MainFrame extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			ref.setTitle("课程管理 - " + new SimpleDateFormat("HH:mm:ss").format(new Date()));
-			renewTable();
+			if (panelFilter.getComponent(0).hasFocus() || filterFrame.hasFocus()) renewTable();
 		}
 		
 	}
