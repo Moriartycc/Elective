@@ -2,22 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b534476d-771b-45b2-9fe3-0a0c8c09340a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/data/element/Course.class" afterPath="$PROJECT_DIR$/bin/data/element/Course.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/data/element/Student.class" afterPath="$PROJECT_DIR$/bin/data/element/Student.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/Main$1.class" afterPath="$PROJECT_DIR$/bin/elective/Main$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/Main$Button1Handler.class" afterPath="$PROJECT_DIR$/bin/elective/Main$Button1Handler.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/Main.class" afterPath="$PROJECT_DIR$/bin/elective/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/data/environment/Environment.class" afterPath="$PROJECT_DIR$/bin/data/environment/Environment.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/frame/MainFrame$1.class" afterPath="$PROJECT_DIR$/bin/elective/frame/MainFrame$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/frame/MainFrame$2.class" afterPath="$PROJECT_DIR$/bin/elective/frame/MainFrame$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/frame/MainFrame$3.class" afterPath="$PROJECT_DIR$/bin/elective/frame/MainFrame$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/frame/MainFrame$4.class" afterPath="$PROJECT_DIR$/bin/elective/frame/MainFrame$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/elective/frame/MainFrame.class" afterPath="$PROJECT_DIR$/bin/elective/frame/MainFrame.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataBase/CourseDataBase/MATH0000.json" afterPath="$PROJECT_DIR$/DataBase/CourseDataBase/MATH0000.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataBase/CourseDataBase/MATH0002.json" afterPath="$PROJECT_DIR$/DataBase/CourseDataBase/MATH0002.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataBase/CourseDataBase/MATH0003.json" afterPath="$PROJECT_DIR$/DataBase/CourseDataBase/MATH0003.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataBase/CourseDataBase/MATH0004.json" afterPath="$PROJECT_DIR$/DataBase/CourseDataBase/MATH0004.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataBase/CourseDataBase/MATH0005.json" afterPath="$PROJECT_DIR$/DataBase/CourseDataBase/MATH0005.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataBase/StudentDataBase/1500010714.json" afterPath="$PROJECT_DIR$/DataBase/StudentDataBase/1500010714.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/elective/frame/MainFrame.java" afterPath="$PROJECT_DIR$/src/elective/frame/MainFrame.java" />
     </list>
@@ -35,8 +26,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/elective/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1110">
-              <caret line="100" column="33" lean-forward="true" selection-start-line="100" selection-start-column="33" selection-end-line="100" selection-end-column="33" />
+            <state relative-caret-position="350">
+              <caret line="142" column="5" lean-forward="true" selection-start-line="142" selection-start-column="5" selection-end-line="142" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -46,7 +37,7 @@
         <entry file="file://$PROJECT_DIR$/bin/elective/Main.class">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="396">
-              <caret line="132" column="27" lean-forward="true" selection-start-line="131" selection-start-column="20" selection-end-line="132" selection-end-column="27" />
+              <caret line="132" column="20" lean-forward="false" selection-start-line="131" selection-start-column="20" selection-end-line="132" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -55,76 +46,23 @@
       <file leaf-file-name="MainFrame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/elective/frame/MainFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="105" column="75" lean-forward="false" selection-start-line="105" selection-start-column="75" selection-end-line="105" selection-end-column="75" />
+            <state relative-caret-position="-485">
+              <caret line="719" column="17" lean-forward="true" selection-start-line="719" selection-start-column="17" selection-end-line="719" selection-end-column="17" />
               <folding>
-                <marker date="1495996842000" expanded="true" signature="17968:17971" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JFrame.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/javax/swing/JFrame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3837">
-              <caret line="696" column="16" lean-forward="false" selection-start-line="696" selection-start-column="16" selection-end-line="696" selection-end-column="16" />
-              <folding>
-                <element signature="e#24496#24497#0" expanded="true" />
-                <element signature="e#24553#24554#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JMenu.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/javax/swing/JMenu.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3101">
-              <caret line="112" column="13" lean-forward="false" selection-start-line="112" selection-start-column="13" selection-end-line="112" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Window.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/java/awt/Window.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="46355">
-              <caret line="3500" column="28" lean-forward="true" selection-start-line="3500" selection-start-column="28" selection-end-line="3500" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JOptionPane.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/javax/swing/JOptionPane.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="633" column="23" lean-forward="false" selection-start-line="633" selection-start-column="23" selection-end-line="633" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Container.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/java/awt/Container.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1671">
-              <caret line="1258" column="16" lean-forward="false" selection-start-line="1258" selection-start-column="16" selection-end-line="1258" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JPanel.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/javax/swing/JPanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-66">
-              <caret line="64" column="19" lean-forward="false" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="19" />
-              <folding>
-                <element signature="e#3040#3041#0" expanded="true" />
-                <element signature="e#3066#3067#0" expanded="true" />
+                <element signature="e#3721#3722#0" expanded="true" />
+                <element signature="e#3758#3759#0" expanded="true" />
+                <element signature="e#3887#3888#0" expanded="true" />
+                <element signature="e#3926#3927#0" expanded="true" />
+                <element signature="e#5804#5812#0" expanded="true" />
+                <element signature="e#7307#7336#1" expanded="true" />
+                <element signature="e#10680#10681#0" expanded="true" />
+                <element signature="e#10703#10704#0" expanded="true" />
+                <element signature="e#11205#16957#0" expanded="true" />
+                <element signature="e#16956#16957#0" expanded="true" />
+                <element signature="e#17286#17287#0" expanded="true" />
+                <element signature="e#17309#17310#0" expanded="true" />
+                <element signature="e#23833#23834#0" expanded="true" />
+                <element signature="e#23900#23901#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -135,6 +73,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>studentPath</find>
+      <find>timetable</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -182,7 +121,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -381,8 +320,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -838,7 +777,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11886000" />
+    <option name="totallyTimeSpent" value="14065000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1600" height="900" extended-state="0" />
@@ -868,11 +807,33 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3994602" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3994602" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29191092" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -890,6 +851,80 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/java/awt/Container.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17730">
+          <caret line="1258" column="16" lean-forward="false" selection-start-line="1258" selection-start-column="16" selection-end-line="1258" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/javax/swing/JOptionPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8700">
+          <caret line="633" column="23" lean-forward="false" selection-start-line="633" selection-start-column="23" selection-end-line="633" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/java/awt/Window.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50550">
+          <caret line="3500" column="28" lean-forward="false" selection-start-line="3500" selection-start-column="28" selection-end-line="3500" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/javax/swing/JMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="885">
+          <caret line="112" column="13" lean-forward="false" selection-start-line="112" selection-start-column="13" selection-end-line="112" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/javax/swing/JFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9570">
+          <caret line="696" column="16" lean-forward="false" selection-start-line="696" selection-start-column="16" selection-end-line="696" selection-end-column="16" />
+          <folding>
+            <element signature="e#24496#24497#0" expanded="true" />
+            <element signature="e#24553#24554#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/elective/frame/MainFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2160">
+          <caret line="154" column="55" lean-forward="false" selection-start-line="154" selection-start-column="55" selection-end-line="154" selection-end-column="55" />
+          <folding>
+            <element signature="e#3721#3722#0" expanded="true" />
+            <element signature="e#3758#3759#0" expanded="true" />
+            <element signature="e#3887#3888#0" expanded="true" />
+            <element signature="e#3926#3927#0" expanded="true" />
+            <element signature="e#5804#5812#0" expanded="true" />
+            <element signature="e#7307#7336#1" expanded="true" />
+            <element signature="e#10680#10681#0" expanded="true" />
+            <element signature="e#10703#10704#0" expanded="true" />
+            <element signature="e#11205#16957#0" expanded="true" />
+            <element signature="e#16956#16957#0" expanded="true" />
+            <element signature="e#17286#17287#0" expanded="true" />
+            <element signature="e#17309#17310#0" expanded="true" />
+            <element signature="e#23833#23834#0" expanded="true" />
+            <element signature="e#23900#23901#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/elective/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="100" column="33" lean-forward="false" selection-start-line="100" selection-start-column="33" selection-end-line="100" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/elective/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -902,7 +937,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="14280">
           <caret line="952" column="0" lean-forward="false" selection-start-line="952" selection-start-column="0" selection-end-line="952" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -910,7 +944,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="8" column="40" lean-forward="false" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -936,7 +969,6 @@
           <caret line="96" column="32" lean-forward="false" selection-start-line="96" selection-start-column="32" selection-end-line="96" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1495986838000" expanded="true" signature="4229:4274" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -946,7 +978,20 @@
         <state relative-caret-position="4755">
           <caret line="368" column="26" lean-forward="true" selection-start-line="368" selection-start-column="26" selection-end-line="368" selection-end-column="26" />
           <folding>
-            <marker date="1495996842000" expanded="true" signature="17968:17971" ph="{...}" />
+            <element signature="e#3721#3722#0" expanded="true" />
+            <element signature="e#3758#3759#0" expanded="true" />
+            <element signature="e#3887#3888#0" expanded="true" />
+            <element signature="e#3926#3927#0" expanded="true" />
+            <element signature="e#5804#5812#0" expanded="true" />
+            <element signature="e#7307#7336#1" expanded="true" />
+            <element signature="e#10680#10681#0" expanded="true" />
+            <element signature="e#10703#10704#0" expanded="true" />
+            <element signature="e#11205#16957#0" expanded="true" />
+            <element signature="e#16956#16957#0" expanded="true" />
+            <element signature="e#17286#17287#0" expanded="true" />
+            <element signature="e#17309#17310#0" expanded="true" />
+            <element signature="e#23833#23834#0" expanded="true" />
+            <element signature="e#23900#23901#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -974,7 +1019,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="14280">
           <caret line="952" column="0" lean-forward="false" selection-start-line="952" selection-start-column="0" selection-end-line="952" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -993,7 +1037,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="8" column="40" lean-forward="false" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1019,7 +1062,6 @@
           <caret line="96" column="32" lean-forward="false" selection-start-line="96" selection-start-column="32" selection-end-line="96" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1495986838000" expanded="true" signature="4229:4274" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1029,7 +1071,20 @@
         <state relative-caret-position="3615">
           <caret line="292" column="11" lean-forward="false" selection-start-line="292" selection-start-column="11" selection-end-line="292" selection-end-column="11" />
           <folding>
-            <marker date="1495996842000" expanded="true" signature="17968:17971" ph="{...}" />
+            <element signature="e#3721#3722#0" expanded="true" />
+            <element signature="e#3758#3759#0" expanded="true" />
+            <element signature="e#3887#3888#0" expanded="true" />
+            <element signature="e#3926#3927#0" expanded="true" />
+            <element signature="e#5804#5812#0" expanded="true" />
+            <element signature="e#7307#7336#1" expanded="true" />
+            <element signature="e#10680#10681#0" expanded="true" />
+            <element signature="e#10703#10704#0" expanded="true" />
+            <element signature="e#11205#16957#0" expanded="true" />
+            <element signature="e#16956#16957#0" expanded="true" />
+            <element signature="e#17286#17287#0" expanded="true" />
+            <element signature="e#17309#17310#0" expanded="true" />
+            <element signature="e#23833#23834#0" expanded="true" />
+            <element signature="e#23900#23901#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1046,7 +1101,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="14280">
           <caret line="952" column="0" lean-forward="false" selection-start-line="952" selection-start-column="0" selection-end-line="952" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1065,7 +1119,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="8" column="40" lean-forward="false" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1091,7 +1144,6 @@
           <caret line="96" column="32" lean-forward="true" selection-start-line="96" selection-start-column="32" selection-end-line="96" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1495986838000" expanded="true" signature="4229:4274" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1108,7 +1160,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="8" column="40" lean-forward="false" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1134,7 +1185,6 @@
           <caret line="89" column="46" lean-forward="true" selection-start-line="89" selection-start-column="46" selection-end-line="89" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1495986838000" expanded="true" signature="4229:4274" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1143,7 +1193,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="14280">
           <caret line="952" column="0" lean-forward="false" selection-start-line="952" selection-start-column="0" selection-end-line="952" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1153,7 +1202,6 @@
           <caret line="156" column="32" lean-forward="false" selection-start-line="156" selection-start-column="32" selection-end-line="156" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1495986838000" expanded="true" signature="4229:4274" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1162,10 +1210,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-41">
           <caret line="129" column="21" lean-forward="false" selection-start-line="129" selection-start-column="21" selection-end-line="129" selection-end-column="21" />
-          <folding>
-            <element signature="e#4119#4120#0" expanded="false" />
-            <element signature="e#4198#4199#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1181,7 +1225,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="8" column="40" lean-forward="false" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1200,56 +1243,39 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4134">
           <caret line="965" column="21" lean-forward="true" selection-start-line="965" selection-start-column="21" selection-end-line="965" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/javax/swing/JPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-66">
+        <state relative-caret-position="495">
           <caret line="64" column="19" lean-forward="false" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="19" />
           <folding>
-            <element signature="e#3040#3041#0" expanded="true" />
-            <element signature="e#3066#3067#0" expanded="true" />
+            <element signature="e#3040#3041#0" expanded="false" />
+            <element signature="e#3066#3067#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bin/elective/Main.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="132" column="27" lean-forward="true" selection-start-line="131" selection-start-column="20" selection-end-line="132" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/java/awt/Container.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1671">
+        <state relative-caret-position="17730">
           <caret line="1258" column="16" lean-forward="false" selection-start-line="1258" selection-start-column="16" selection-end-line="1258" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/javax/swing/JOptionPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="633" column="23" lean-forward="false" selection-start-line="633" selection-start-column="23" selection-end-line="633" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/java/awt/Window.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46355">
-          <caret line="3500" column="28" lean-forward="true" selection-start-line="3500" selection-start-column="28" selection-end-line="3500" selection-end-column="28" />
+        <state relative-caret-position="50550">
+          <caret line="3500" column="28" lean-forward="false" selection-start-line="3500" selection-start-column="28" selection-end-line="3500" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/javax/swing/JMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3101">
+        <state relative-caret-position="885">
           <caret line="112" column="13" lean-forward="false" selection-start-line="112" selection-start-column="13" selection-end-line="112" selection-end-column="13" />
           <folding />
         </state>
@@ -1257,7 +1283,7 @@
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/javax/swing/JFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3837">
+        <state relative-caret-position="9570">
           <caret line="696" column="16" lean-forward="false" selection-start-line="696" selection-start-column="16" selection-end-line="696" selection-end-column="16" />
           <folding>
             <element signature="e#24496#24497#0" expanded="true" />
@@ -1266,20 +1292,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/javax/swing/JOptionPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="633" column="23" lean-forward="false" selection-start-line="633" selection-start-column="23" selection-end-line="633" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/elective/Main.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="132" column="20" lean-forward="false" selection-start-line="131" selection-start-column="20" selection-end-line="132" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/elective/frame/MainFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="105" column="75" lean-forward="false" selection-start-line="105" selection-start-column="75" selection-end-line="105" selection-end-column="75" />
+        <state relative-caret-position="-485">
+          <caret line="719" column="17" lean-forward="true" selection-start-line="719" selection-start-column="17" selection-end-line="719" selection-end-column="17" />
           <folding>
-            <marker date="1495996842000" expanded="true" signature="17968:17971" ph="{...}" />
+            <element signature="e#3721#3722#0" expanded="true" />
+            <element signature="e#3758#3759#0" expanded="true" />
+            <element signature="e#3887#3888#0" expanded="true" />
+            <element signature="e#3926#3927#0" expanded="true" />
+            <element signature="e#5804#5812#0" expanded="true" />
+            <element signature="e#7307#7336#1" expanded="true" />
+            <element signature="e#10680#10681#0" expanded="true" />
+            <element signature="e#10703#10704#0" expanded="true" />
+            <element signature="e#11205#16957#0" expanded="true" />
+            <element signature="e#16956#16957#0" expanded="true" />
+            <element signature="e#17286#17287#0" expanded="true" />
+            <element signature="e#17309#17310#0" expanded="true" />
+            <element signature="e#23833#23834#0" expanded="true" />
+            <element signature="e#23900#23901#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/elective/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1110">
-          <caret line="100" column="33" lean-forward="true" selection-start-line="100" selection-start-column="33" selection-end-line="100" selection-end-column="33" />
+        <state relative-caret-position="350">
+          <caret line="142" column="5" lean-forward="true" selection-start-line="142" selection-start-column="5" selection-end-line="142" selection-end-column="5" />
           <folding />
         </state>
       </provider>

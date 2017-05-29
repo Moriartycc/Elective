@@ -73,7 +73,7 @@ public class MainFrame extends JFrame {
 	private JMenuItem advancedFilter = new JMenuItem("高级筛选信息(A)"), exportTimetable = new JMenuItem("导出课程表(E)"), helpUnit = new JMenuItem("操作提示");
 	private Student user;
 	ArrayList<String> planSelectedList = new ArrayList<String>();
-	private byte nowState = 0; // 0-选课计划, 1-预选列表, 2-已选列表
+	private byte nowState = 0; // 0-所有课程, 1-预选列表, 2-已选列表
 	private byte dispState = 0; //0-不显示显示, 1-显示
 	private FilterFrame filterFrame = new FilterFrame(this);
 	private Timer timer;
@@ -262,7 +262,7 @@ public class MainFrame extends JFrame {
 		panel2.add(btn1, BorderLayout.WEST);
 		panel2.add(btn2, BorderLayout.EAST);
 		panel2.add(new JLabel("西京大学选课系统 Version 0.2", JLabel.CENTER), BorderLayout.SOUTH);
-		panel1.add(new JLabel("选课计划", JLabel.CENTER), BorderLayout.CENTER);
+		panel1.add(new JLabel("所有课程", JLabel.CENTER), BorderLayout.CENTER);
 		panel1.add(btn3, BorderLayout.EAST);
 		panelFilter.add(filter, BorderLayout.CENTER);
 		panel1.add(panelFilter, BorderLayout.WEST);
@@ -489,20 +489,20 @@ public class MainFrame extends JFrame {
 				case 0:
 					nowState = 1;
 					((JLabel) panel1.getComponent(0)).setText("预选列表");
-					btn1.setText("选课计划");
+					btn1.setText("所有课程");
 					btn2.setText("已选列表");
 					renewTable();
 					break;
 				case 1:
 					nowState = 0;
-					((JLabel) panel1.getComponent(0)).setText("选课计划");
+					((JLabel) panel1.getComponent(0)).setText("所有课程");
 					btn1.setText("预选列表");
 					btn2.setText("已选列表");
 					renewTable();
 					break;
 				case 2:
 					nowState = 0;
-					((JLabel) panel1.getComponent(0)).setText("选课计划");
+					((JLabel) panel1.getComponent(0)).setText("所有课程");
 					btn1.setText("预选列表");
 					btn2.setText("已选列表");
 					renewTable();
@@ -520,21 +520,21 @@ public class MainFrame extends JFrame {
 				case 0:
 					nowState = 2;
 					((JLabel) panel1.getComponent(0)).setText("已选列表");
-					btn1.setText("选课计划");
+					btn1.setText("所有课程");
 					btn2.setText("预选列表");
 					renewTable();
 					break;
 				case 1:
 					nowState = 2;
 					((JLabel) panel1.getComponent(0)).setText("已选列表");
-					btn1.setText("选课计划");
+					btn1.setText("所有课程");
 					btn2.setText("预选列表");
 					renewTable();
 					break;
 				case 2:
 					nowState = 1;
 					((JLabel) panel1.getComponent(0)).setText("预选列表");
-					btn1.setText("选课计划");
+					btn1.setText("所有课程");
 					btn2.setText("已选列表");
 					renewTable();
 					break;
@@ -685,7 +685,7 @@ public class MainFrame extends JFrame {
         	   for (int i : course.getClassTime()) {
         		   EventQueue.invokeLater(new Runnable() {
     			      @Override public void run() {
-    			        timeTable.setRowHeight(i % 12, 200);
+    			        timeTable.setRowHeight(i % 12, 100);
     			      }
     			    });
         		   timeTableData[i % 12].setElementAt("<html><div align=\"center\"><font color=rgb(" + r + ',' + g + ',' + b + ")>" + course.getName() + "<br />（" + course.getTeacherName() + " " + course.getClassID() + "班）</font></div></html>", i / 12 + 1);
@@ -730,14 +730,12 @@ public class MainFrame extends JFrame {
 		 */
 		private static final long serialVersionUID = 1L;
 
-	//��ʼ�����Ͻ�λ��  
 	   public GBC(int gridx, int gridy)  
 	   {  
 	      this.gridx = gridx;  
 	      this.gridy = gridy;  
 	   }  
-	  
-	   //��ʼ�����Ͻ�λ�ú���ռ����������  
+
 	   public GBC(int gridx, int gridy, int gridwidth, int gridheight)  
 	   {  
 	      this.gridx = gridx;  
@@ -745,44 +743,38 @@ public class MainFrame extends JFrame {
 	      this.gridwidth = gridwidth;  
 	      this.gridheight = gridheight;  
 	   }  
-	  
-	   //���뷽ʽ  
+
 	   public GBC setAnchor(int anchor)  
 	   {  
 	      this.anchor = anchor;  
 	      return this;  
 	   }  
-	  
-	   //�Ƿ����켰���췽��  
+
 	   public GBC setFill(int fill)  
 	   {  
 	      this.fill = fill;  
 	      return this;  
 	   }  
-	  
-	   //x��y�����ϵ�����  
+
 	   public GBC setWeight(double weightx, double weighty)  
 	   {  
 	      this.weightx = weightx;  
 	      this.weighty = weighty;  
 	      return this;  
 	   }  
-	  
-	   //�ⲿ���  
+
 	   public GBC setInsets(int distance)  
 	   {  
 	      this.insets = new Insets(distance, distance, distance, distance);  
 	      return this;  
 	   }  
-	  
-	   //�����  
+
 	   public GBC setInsets(int top, int left, int bottom, int right)  
 	   {  
 	      this.insets = new Insets(top, left, bottom, right);  
 	      return this;  
 	   }  
-	  
-	   //�����  
+
 	   public GBC setIpad(int ipadx, int ipady)  
 	   {  
 	      this.ipadx = ipadx;  
