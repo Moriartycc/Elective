@@ -64,6 +64,7 @@ public class MainFrame extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private int lastRow = -1;
 	private JPanel contentPane, panel1, panel2, panel3, panel4, panelFilter, panelScroll, panelTimetable, panelTimetableUp, panelTimetableDown;
 	private JButton btn1, btn2, btn3;
 	private JTextField filter;
@@ -480,7 +481,6 @@ public class MainFrame extends JFrame {
 		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();//单元格渲染器  
 		tcr.setHorizontalAlignment(JLabel.CENTER);//居中显示  
 		timeTable.setDefaultRenderer(Object.class, tcr);//设置渲染器  
-		
 		btn1.addActionListener(new ActionListener() {
 
 			@Override
@@ -685,7 +685,7 @@ public class MainFrame extends JFrame {
         	   for (int i : course.getClassTime()) {
         		   EventQueue.invokeLater(new Runnable() {
     			      @Override public void run() {
-    			        timeTable.setRowHeight(i % 12, 200);
+    			        timeTable.setRowHeight(i % 12, 100);
     			      }
     			    });
         		   timeTableData[i % 12].setElementAt("<html><div align=\"center\"><font color=rgb(" + r + ',' + g + ',' + b + ")>" + course.getName() + "<br />（" + course.getTeacherName() + " " + course.getClassID() + "班）</font></div></html>", i / 12 + 1);
